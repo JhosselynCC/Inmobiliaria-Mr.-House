@@ -21,8 +21,8 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("SELECT l FROM Property l WHERE l.title = :title")
     public Property searchbyProperty(@Param("title") String title);
-
-    @Query("SELECT l FROM Property l WHERE l.Publisher.name = :name")
+/*
+    @Query("SELECT l FROM Property l WHERE l.Publishers.name = :name")
     public List<Property> searchbyPublisher(@Param("name") String name);
-
+*/
 }

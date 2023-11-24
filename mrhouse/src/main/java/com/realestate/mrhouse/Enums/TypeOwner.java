@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.realestate.mrhouse.Services;
-
-import org.springframework.stereotype.Service;
+package com.realestate.mrhouse.Enums;
 
 /**
  *
  * @author 2171584201008
  */
-
-@Service
-public class TypeOwnerService {
-    
+public enum TypeOwner {
+    INMOBILIARIA,
+    DUENODIRECTO;
 }

@@ -5,12 +5,17 @@
  */
 package com.realestate.mrhouse.Entities;
 
+import com.realestate.mrhouse.Enums.TypePublication;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,14 +31,19 @@ public class Property {
 
     private Long Id;
     
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private TypePublication typePublication;
     
     private String title;
     private String features;
     private Double price;
-    private String Images;
+   
+    @OneToMany
+    private List<Image> images;
+    
     private String location;
+    private String provincia;
+    private String ciudad;
     
     @ManyToOne
     private Publishers publishers;
@@ -85,12 +95,12 @@ public class Property {
         this.price = price;
     }
 
-    public String getImages() {
-        return Images;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImages(String Images) {
-        this.Images = Images;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public String getLocation() {
@@ -99,6 +109,22 @@ public class Property {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
     public Publishers getPublishers() {
@@ -117,7 +143,6 @@ public class Property {
         this.alta = alta;
     }
 
-   
-        
+    
 
 }

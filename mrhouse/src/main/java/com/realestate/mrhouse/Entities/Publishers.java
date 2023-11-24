@@ -5,10 +5,14 @@
  */
 package com.realestate.mrhouse.Entities;
 
+import com.realestate.mrhouse.Enums.TypeOwner;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -25,7 +29,36 @@ public class Publishers {
     private String Id;
     private String nombre;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private TypeOwner typeOwner;
+
+    public Publishers() {
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String Id) {
+        this.Id = Id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public TypeOwner getTypeOwner() {
+        return typeOwner;
+    }
+
+    public void setTypeOwner(TypeOwner typeOwner) {
+        this.typeOwner = typeOwner;
+    }
+    
+    
 
 }

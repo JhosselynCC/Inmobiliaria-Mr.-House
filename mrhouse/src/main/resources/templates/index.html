@@ -1,14 +1,98 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
- <head th:replace="/fragments/head::head">    </head>
-    <body>
-        <nav th:replace="/fragments/navbar::nav"></nav>
-        
-        <div>TODO write content index</div>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>MrHouse</title>
+</head>
+
+<body>
+
+    <!--NAVEGADOR-->
+
+    <header class="header">
+        <div class="logo" href="#">
+            <img src="" alt="logoMrHouse">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">COMPRAR</a></li>
+                <li><a href="#">VENDER</a></li>
+                <li><a href="#">ALQUILAR</a></li>
+                <li><a href="#">LOGIN</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn"><button>CONTACTO</button></a>
+    </header>
+
+    <!--TITULO-->
+
+    <div class="titulo">
+        <h1>Mr. HOUSE</h1>
+        <h2>La propiedad que busques esta aquí</h2>
+    </div>
+
+    <!--CARRUSEL-->
+
+    <div class="slider-box">
+        <ul>
+            <li id="img1">
+                <img src="img/alquiler.jpg" alt="IMG_1" href="#">
+
+                <div class="texto"> <!-- Div es solo para el texto -->
+                    <h2>Alquileres</h2>
+                    <p>
+                        Ingresa a aquí para poder ver todos ofertas de alquileres que se encuentren disponibles.
+                    </p>
+                </div>
+            </li>
+            <li id="img2">
+
+                <img src="img/Venta.jpg" alt="IMG_2" href="#">
+                <div class="texto" >
+                    <h2>Ventas</h2>
+                    <p>
+                        Ingrese para poder visualizar todas las ofertas en venta de propiedades
+                    </p>
+                </div>
+
+            </li>
+            <li id="img3">
+
+                <img src="img/Dueños.jpg" alt="IMG_3" href="#">
+                <div class="texto" >
+                    <h2>Dueños</h2>
+                    <p>
+                        Ingreso para dueños de las propiedades, donde podrán ofertar y mostrar sus propiedades al público en general.
+                    </p>
+                </div>
+
+            </li>
+            <li id="img4">
+
+                <img src="img/loginCasa.JPG" alt="IMG_4" href="#">
+                <div class="texto" >
+                    <h2>LOGIN</h2>
+                    <p>
+                        Registrate para poder ofertar o para poder buscar tu proximo hogar.
+
+                    </p>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+    <div class="navigation-manual">
+        <a href="#img1" class="manual-btn"></a>
+        <a href="#img2" class="manual-btn"></a>
+        <a href="#img3" class="manual-btn"></a>
+        <a href="#img4" class="manual-btn"></a>
+    </div>
+
+</body>
+
 </html>

@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,900;1,400;1,500&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 3rem;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 2rem;
+}
+
+body{
+    background-color: black; 
+}
+
+/*----NAV BAR-------*/
+
+.header{
+    background-color: rgb(39, 3, 95);
+    display: flex;
+    justify-content: space-between; /*--space-between: todo el ancho -- flex-end: todo a la derecha --*/
+    align-items: center;
+    height: 85px;
+    padding: 5px 10%;
+}
+
+.header .logo{
+    color: aliceblue;
+    cursor: pointer;
+    margin-right: auto; /*--Logo todo a la derecha--*/
+}
+
+.header .logo img{
+    height: 70px;
+    width: auto;
+    transition: all 0.3s;
+}
+
+.header .logo img:hover{
+    transform: scale(1.2);
+}
+
+.header .nav-links{
+    list-style: none;
+}
+
+.header .nav-links li{
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.header .nav-links li:hover{
+    transform: scale(1.1);
+}
+
+.header .nav-links a{
+    font-size: 700;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.header .nav-links li a:hover{
+    color: rgb(226, 70, 43);
+}
+
+.header .btn button{
+    margin-left: 20px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    padding: 9px 25px;
+    background: rgb(29, 39, 87);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.header .btn button:hover{
+    background-color: rgb(77, 85, 139);
+    color: rgb(255, 30, 30);
+    transform: scale(1.1);
+}
+
+/*-----TITULO------*/
+
+.titulo {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 500px;
+    padding-top: 50px;
+}
+
+
+/*---CARROUSEL----*/
+
+.slider-box {
+    width: 1280px;
+    height: auto;
+    margin: 50px auto 0;
+    overflow: hidden;  /*<--- poner cuando tenga imagen*/
+    
+}
+
+.slider-box ul{
+    display: flex;
+    padding: 0;
+    width: 400%;  
+
+    animation: slide 15s infinite alternate ease-in-out;
+}
+
+.slider-box li {
+    width: 100%;
+    position: relative;
+    display: flex; /*PROPIEDADES DEL TIPO*/
+    justify-content: center; /*El hijo centrado de manera horizontal*/
+    /*list-style: none;*/
+    width: 100%;
+}
+
+.slider-box img {
+    width: 300px;
+    /*width: 300px;*/
+    cursor: pointer; /*-- poner el dedito --*/
+}
+
+.texto {
+    margin-top: 20px;
+    width: 50%;
+    position: flex;
+    text-align: center;
+    padding: 0 10px;
+    top: 250px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 0 #333, 1px 1px 0 #333, 1px 1px 0 #333, 1px 1px 0 #333;
+}
+
+.texto h2 {
+    margin-top: 0px;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+/*PUNTOS*/
+
+.navigation-manual { 
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    bottom: 50px;
+    gap: 10px;
+}
+
+.navigation-manual a {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(39, 3, 95);
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 1;
+    transition: 300ms ease-in-out;
+}
+
+.navigation-manual a:hover{
+    scale: 1.2;
+    opacity: 1;
+}
+
+.manual-btn{
+    border: 2px solid rgb(154, 94, 250);
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.manual-btn:not(:last-child){
+    margin-right: 40px;
+}
+
+.manual-btn:hover{
+    background: rgb(164, 129, 221);
+}
+
+/* #radio1:checked ~ .first{} */
+
+
+
+/*ANIMACIÓN*/
+
+@keyframes slide {
+    0% {margin-left: 0;}
+    20% {margin-left: 0;}
+    
+    25% {margin-left: -100%;}
+    45% {margin-left: -100%;}
+
+    50% {margin-left: -200%;}
+    70% {margin-left: -200%;}
+
+    75% {margin-left: -300%;}
+    100% {margin-left: -300%;}
+}
+
+/*responsive*/
+
+@media(max-width:991px) {
+
+    body {
+        padding: 30px;
+    }
+
+    .header{
+        padding: 30px; 
+    }
+
+    .slider-box{
+        width: 100%;
+    }
+
+    .texto {
+        top: 50px;
+        padding:0; 
+    }
+
+    .texto h2 {
+        font-size: 35px;
+        margin-bottom: 15px;
+    }
+
+    .texto p {
+        font-size: 15px;
+    }
+}
