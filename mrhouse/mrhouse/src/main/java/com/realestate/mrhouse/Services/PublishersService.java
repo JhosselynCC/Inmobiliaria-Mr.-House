@@ -6,7 +6,6 @@
 package com.realestate.mrhouse.Services;
 
 import com.realestate.mrhouse.Entities.Publishers;
-import com.realestate.mrhouse.Enums.TypeOwner;
 import com.realestate.mrhouse.Exceptions.MyException;
 import com.realestate.mrhouse.Repositories.PublishersRepository;
 import java.util.ArrayList;
@@ -27,11 +26,8 @@ public class PublishersService {
   
   @Transactional
   public void createPublishersService(String name) throws MyException{
-     validar(name);
+      validar(name);
      Publishers publishers = new Publishers();
-     
-     
-     publishers.setTypeOwner(TypeOwner.DUENODIRECTO);
      
      publishers.setNombre(name);
      

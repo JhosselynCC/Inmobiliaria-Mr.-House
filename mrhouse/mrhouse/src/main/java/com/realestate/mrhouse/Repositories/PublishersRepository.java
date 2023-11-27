@@ -5,11 +5,8 @@
  */
 package com.realestate.mrhouse.Repositories;
 
-import com.realestate.mrhouse.Entities.Property;
-import java.util.List;
+import com.realestate.mrhouse.Entities.Publishers;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,9 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author 2171584201008
  */
 @Repository
-public interface PropertyRepository extends JpaRepository<Property, Long> {
-
-    @Query("SELECT l FROM Property l WHERE l.title = :title")
-    public Property searchbyProperty(@Param("title") String title);
-
+public interface PublishersRepository extends JpaRepository<Publishers, String>{
+    
 }

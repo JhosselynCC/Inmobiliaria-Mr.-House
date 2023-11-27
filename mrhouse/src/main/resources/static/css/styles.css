@@ -1,0 +1,20 @@
+.bg-venta {
+    background: rgb(33,37,41);
+    background: linear-gradient(180deg, rgba(33,37,41,1) 56%, rgba(59,66,73,1) 100%); 
+}
+.navbar{
+    background-color: #22333B;
+}
+.navbar-text{
+    color: #F2F4F3;
+}
+.navbar-brand{
+    color: #F2F4F3;
+}
+.nav-link{
+    color: #F2F4F3 !important;
+}
+.header{
+    background-color: #22333B;
+    text-align: center;
+}
