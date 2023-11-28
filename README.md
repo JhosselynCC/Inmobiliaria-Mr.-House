@@ -4,3 +4,4 @@ Commit 23.11.2023
 Se agrega index, footer, numeradores y servicios
 Se agrega ultimos cambios de la presentacion de W1-
 28.11/2023 SE Agrega CRUD entidades Propiedad,Plublicador JC
+28.11/2023 Se deja Script para insertar propiedades JC
