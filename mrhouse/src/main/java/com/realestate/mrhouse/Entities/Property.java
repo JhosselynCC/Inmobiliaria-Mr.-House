@@ -5,6 +5,7 @@
  */
 package com.realestate.mrhouse.Entities;
 
+import com.realestate.mrhouse.Enums.TypeProperty;
 import com.realestate.mrhouse.Enums.TypePublication;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,28 +28,35 @@ import javax.persistence.TemporalType;
 @Entity
 public class Property {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long Id;
-    
+
     @Enumerated(EnumType.STRING)
     private TypePublication typePublication;
-    
+
     private String title;
+
+    @Enumerated(EnumType.STRING)
+    private TypeProperty typeProperty;
+    
     private String features;
     private Double price;
-   
+/*
     @OneToMany
     private List<Image> images;
-    
+   */ 
+     @OneToOne
+    private Image image;
+
     private String location;
-    private String provincia;
-    private String ciudad;
-    
+    private String province;
+    private String city;
+
     @ManyToOne
     private Publishers publishers;
-    
 
     @Temporal(TemporalType.DATE)
     private Date alta;
@@ -79,6 +88,14 @@ public class Property {
         this.title = title;
     }
 
+    public TypeProperty getTypeProperty() {
+        return typeProperty;
+    }
+
+    public void setTypeProperty(TypeProperty typeProperty) {
+        this.typeProperty = typeProperty;
+    }
+
     public String getFeatures() {
         return features;
     }
@@ -95,12 +112,12 @@ public class Property {
         this.price = price;
     }
 
-    public List<Image> getImages() {
-        return images;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public String getLocation() {
@@ -111,20 +128,20 @@ public class Property {
         this.location = location;
     }
 
-    public String getProvincia() {
-        return provincia;
+    public String getProvince() {
+        return province;
     }
 
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public String getCity() {
+        return city;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Publishers getPublishers() {
@@ -144,5 +161,7 @@ public class Property {
     }
 
     
+
+  
 
 }

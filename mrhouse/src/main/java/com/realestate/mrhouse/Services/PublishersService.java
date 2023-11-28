@@ -22,46 +22,50 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PublishersService {
-  @Autowired
-  PublishersRepository publishersRepository;
-  
-  @Transactional
-  public void createPublishersService(String name) throws MyException{
-     validar(name);
-     Publishers publishers = new Publishers();
-     
-     
-     publishers.setTypeOwner(TypeOwner.DUENODIRECTO);
-     
-     publishers.setNombre(name);
-     
-     publishersRepository.save(publishers);
-  }
-  
-  public List<Publishers> listPublishers(){
-      List<Publishers> publishers = new ArrayList(); 
-      
-      publishers = publishersRepository.findAll();
-      
-      return publishers;
-  }
-  
-  public void EditPublishers(String name, String id) throws MyException {
-      validar(name);
-        
+
+    @Autowired
+    PublishersRepository publishersRepository;
+
+    @Transactional
+    public void createPublishersService(String name, String typeOwner) throws MyException {
+        validar(name);
+        Publishers publishers = new Publishers();
+
+        publishers.setName(name);
+ 
+        publishers.setTypeOwner(TypeOwner.valueOf(typeOwner));
+
+        publishersRepository.save(publishers);
+    }
+
+    public List<Publishers> listPublishers() {
+        List<Publishers> publishers = new ArrayList();
+        publishers = publishersRepository.findAll();
+        return publishers;
+    }
+    
+
+
+    public void EditPublishers(String name, String id) throws MyException {
+        validar(name);
+
         Optional<Publishers> respuesta = publishersRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Publishers a = respuesta.get();
 
-            a.setNombre(name);
+            a.setName(name);
 
             publishersRepository.save(a);
 
         }
 
     }
-  private void validar(String name) throws MyException {
+
+      public Publishers getOne(String id){
+        return publishersRepository.getOne(id);
+    }
+    private void validar(String name) throws MyException {
         if (name == null) {
             throw new MyException("El nombre de la inmobiliaria no puede estar vacio");
         }
