@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.realestate.mrhouse.Services;
+
 import com.realestate.mrhouse.Entities.Users;
 import com.realestate.mrhouse.Exceptions.MyException;
 import com.realestate.mrhouse.Relations.Rol;
@@ -29,8 +30,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import static com.sun.jmx.snmp.SnmpStatusException.readOnly;
 
-
-
 /**
  *
  * @author 2171584201008
@@ -38,25 +37,24 @@ import static com.sun.jmx.snmp.SnmpStatusException.readOnly;
 @Service
 public class UserService implements UserDetailsService {
 
-    
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private EmailServices emailService;
-    
 
     @Transactional
-    public void register(String name, String email, String password, String password2) throws MyException {
-        validation(name, email, password, password2);
+    public void register(String name, String email, String password, String password2, Long dni, Rol rol) throws MyException {
+        validation(name, email, password, password2, dni, rol);
 
         Users user = new Users();
 
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
+        user.setDni(dni);
         //user.setPassword(new BCryptPasswordEncoder().encode(password));
-        user.setRol(Rol.USER);
+        user.setRol(rol);
 
         userRepository.save(user);
 
@@ -64,7 +62,7 @@ public class UserService implements UserDetailsService {
                 "su usuario fue creado correctamente y vinculado al correo electronico " + email);
     }
 
-    private void validation(String name, String email, String password, String password2) throws MyException {
+    private void validation(String name, String email, String password, String password2, Long dni, Rol rol) throws MyException {
         if (name.isEmpty() || name == null) {
             throw new MyException("el nombre no puede ser nulo o estar vacío");
         }
@@ -77,6 +75,12 @@ public class UserService implements UserDetailsService {
 
         if (!password.equals(password2)) {
             throw new MyException("Las contraseñas ingresadas deben ser iguales");
+        }
+        if (dni == null || dni <= 0) {
+            throw new MyException("El DNI no puede ser nulo o menor o igual a cero");
+        }
+        if (rol == null) {
+            throw new MyException("Se debe seleccionar un rol");
         }
 
     }
@@ -92,12 +96,12 @@ public class UserService implements UserDetailsService {
             List<GrantedAuthority> permissions = new ArrayList();
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
             permissions.add(p);
-/*
+            /*
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("usuariosession", u);
-*/
-            return new User(u.getEmail(), u.getPassword(),permissions);
+             */
+            return new User(u.getEmail(), u.getPassword(), permissions);
 
         } else {
             return null;

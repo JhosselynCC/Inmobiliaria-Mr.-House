@@ -7,6 +7,7 @@ package com.realestate.mrhouse.Controllers;
 
 import com.realestate.mrhouse.Entities.Users;
 import com.realestate.mrhouse.Exceptions.MyException;
+import com.realestate.mrhouse.Relations.Rol;
 import com.realestate.mrhouse.Services.UserService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class PortalController {
-    
+
     @Autowired
     private UserService userService;
 
@@ -39,12 +40,11 @@ public class PortalController {
     }
 
     @PostMapping("/registration")
-    public String register (@RequestParam String name, @RequestParam String email, @RequestParam String password, String password2,
+    public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol,
             ModelMap modelo) {
 
-        
         try {
-            userService.register( name, email, password, password2);
+            userService.register(name, email, password, password2, dni, rol);
             modelo.put("exito", "usuario fue cargado correctamente");
             return "index.html";
 
@@ -52,9 +52,18 @@ public class PortalController {
             modelo.put("error", ex.getMessage());
             modelo.put("name", name);
             modelo.put("email", email);
+            modelo.put("dni", dni);
+            modelo.put("rol", rol);
 
             return "registration.html";
         }
+    }
+
+    @GetMapping("/registration")
+    public String mostrarFormularioRegistro(ModelMap model) {
+        model.addAttribute("roles", Rol.values());
+        // Otros atributos y lógica necesaria para mostrar el formulario
+        return "registration"; // suponiendo que "registration" es tu plantilla HTML
     }
 
     @GetMapping("/login")
