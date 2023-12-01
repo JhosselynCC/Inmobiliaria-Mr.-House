@@ -6,6 +6,7 @@
 package com.realestate.mrhouse.Services;
 
 import com.realestate.mrhouse.Entities.Image;
+import com.realestate.mrhouse.Entities.Property;
 import com.realestate.mrhouse.Exceptions.MyException;
 import com.realestate.mrhouse.Repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public Image save(MultipartFile images) throws MyException {
+    public Image save(MultipartFile images,Property property) throws MyException {
         if (images != null) {
             try {
 
@@ -30,6 +31,7 @@ public class ImageService {
                 i.setMime(images.getContentType());
                 i.setNombre(images.getName());
                 i.setContenido(images.getBytes());
+                i.setProperty(property);
 
                 return imageRepository.save(i);
 
@@ -41,4 +43,7 @@ public class ImageService {
         return null;
     }
 
+    public byte[] imgToBite(String id) {
+        return imageRepository.findById(id).get().getContenido();
+    }
 }

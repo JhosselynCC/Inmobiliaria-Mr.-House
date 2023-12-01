@@ -21,5 +21,10 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("SELECT l FROM Property l WHERE l.title = :title")
     public Property searchbyProperty(@Param("title") String title);
-
+    /*
+    @Q
+    
+    select a.id, b.contenido from property a
+inner join image b on a.id like b.property_id;
+*/
 }

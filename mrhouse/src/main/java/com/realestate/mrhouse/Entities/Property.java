@@ -44,12 +44,14 @@ public class Property {
     
     private String features;
     private Double price;
-/*
+
     @OneToMany
-    private List<Image> images;
-   */ 
+    private List<Image> image;
+ 
+   /*
      @OneToOne
     private Image image;
+  */ 
 
     private String location;
     private String province;
@@ -112,11 +114,11 @@ public class Property {
         this.price = price;
     }
 
-    public Image getImage() {
+    public List<Image> getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(List<Image> image) {
         this.image = image;
     }
 
@@ -159,9 +161,7 @@ public class Property {
     public void setAlta(Date alta) {
         this.alta = alta;
     }
-
     
-
   
 
 }

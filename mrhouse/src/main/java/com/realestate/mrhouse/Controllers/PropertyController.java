@@ -50,7 +50,7 @@ public class PropertyController {
     public String registration(@RequestParam String typePublication, @RequestParam String title, @RequestParam String typeProperty,
             @RequestParam String features, @RequestParam(required = false) Double price,
             String location, String province, String city, @RequestParam String idPublisher,
-            ModelMap modelo, MultipartFile images) {
+            ModelMap modelo,List<MultipartFile> images) {
 
         try {
             propertyService.createProperty(images, typePublication, title, typeProperty, features, price, location, province, city, idPublisher);

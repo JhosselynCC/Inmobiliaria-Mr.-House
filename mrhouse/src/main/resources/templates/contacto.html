@@ -1,4 +1,5 @@
 <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -56,20 +57,32 @@
             </div>
             <div class="mb-3">
 
-                <form class="formulario" action="/contacto" method="POST" enctype="multipart/form-data">
+                <form class="formulario" th:action="@{/contacto/registration}" method="POST" enctype="multipart/form-data">
 
                     <div>
                         <label for="nombreApellido" class="form-label"></label>
-                        <input class="form-control" name="nombreApellido" type="text" placeholder="Nombre y Apellido" required>
+                        <input class="form-control" name="nombre" type="text" placeholder="Nombre y Apellido" required>
                     </div><div>
                         <label for="email" class="form-label"></label>
                         <input class="form-control" name="email" type="email" placeholder="Ejemplo@mail.com" required>
                     </div><div>
                         <label for="telefono" class="form-label"></label>
-                        <input class="form-control" name="telefono" type="number" placeholder="11 1234567" required>
+                        <input class="form-control" name="telefono" type="tel" placeholder="(Codigo de area) numero" required>
                     </div><div>
                         <label for="direccion" class="form-label"></label>
                         <input class="form-control" name="direccion" type="text" placeholder="Direccion" required>
+                    </div>
+                    <div>
+                        <label for="Motivo" class="form-label"></label>
+                        <select name="typeContacto" id="typeContacto" class="form-select" required>
+                        <option hidden selected>Tipo de contacto</option>
+                        <option value="VENTA">Comprar o vender una propiedad</option>
+                        <option value="ALQUILER">Alquilar una propiedad</option>
+                        <option value="FRANQUICIAS">Oportunidad de franquicias</option>
+                        <option value="OFICINA">Buscar una oficina o agente</option>
+                        <option value="COMENTARIO">Comentarios sobre el sitio web</option>
+                        <option value="INFO">Mas informacion</option>
+                    </select>
                     </div>
                     <div class="mb-3">
                         <label for="mensaje" class="form-label"></label>
@@ -78,10 +91,22 @@
                     <button type="submit" class="btn btn-primary">Enviar</button>
 
                 </form>
+                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+                <div class="card-body">
+                    <h5 class="card-title">Error 👎</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+
+            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                <div class="card-body">
+                    <h5 class="card-title">Exito!</h5>
+                    <p class="card-text" th:text="${exito}"></p>
+                </div>
+            </div>
         </section>
 
         <!--
-  
       <footer class="text-muted py-5">
           <div class="containerFooter">
               <p class="mb-1">Mr.House servicios inmobiliarios 2023</p>            

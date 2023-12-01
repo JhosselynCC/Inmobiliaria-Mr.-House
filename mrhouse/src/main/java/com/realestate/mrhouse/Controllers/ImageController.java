@@ -6,6 +6,7 @@
 package com.realestate.mrhouse.Controllers;
 
 import com.realestate.mrhouse.Entities.Property;
+import com.realestate.mrhouse.Services.ImageService;
 import com.realestate.mrhouse.Services.PropertyService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,14 +30,13 @@ public class ImageController {
 
     @Autowired
     private PropertyService propertyService;
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/photos/{id}")
 
-    public ResponseEntity<byte[]> imageProperty(@PathVariable Long id) {
-        Property property= propertyService.getOne(id);
-
-        byte[] image = property.getImage().getContenido();
-                
+    public ResponseEntity<byte[]> imageProperty(@PathVariable String id) {
+        byte[] image = imageService.imgToBite(id);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

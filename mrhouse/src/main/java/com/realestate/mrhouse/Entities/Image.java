@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -31,6 +32,9 @@ public class Image {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] contenido;
+    
+     @ManyToOne
+    private Property property;
 
     public Image() {
     }
@@ -65,6 +69,14 @@ public class Image {
 
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
     }
     
     
