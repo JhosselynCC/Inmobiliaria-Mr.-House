@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.realestate.mrhouse.Relations;
-
-
-import org.omg.PortableInterceptor.USER_EXCEPTION;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+package com.realestate.mrhouse.Enums;
 
 /**
  *
  * @author 2171584201008
  */
-public enum Rol {
-    ADMIN,
-    CLIENT,
-    ENTE;    
+public enum ShiftStatus {
+    DISPONIBLE,
+    CANCELADO,
+    RESERVADO;
 }

@@ -11,6 +11,7 @@ import com.realestate.mrhouse.Relations.Rol;
 import com.realestate.mrhouse.Services.UserService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,24 +62,31 @@ public class PortalController {
 
     @GetMapping("/registration")
     public String mostrarFormularioRegistro(ModelMap model) {
-        model.addAttribute("roles", Rol.values());
-        // Otros atributos y lógica necesaria para mostrar el formulario
-        return "registration"; // suponiendo que "registration" es tu plantilla HTML
+        if (model != null) {
+            model.addAttribute("roles", Rol.values());
+            // Otros atributos y lógica necesaria para mostrar el formulario
+            return "registration"; // suponiendo que "registration" es tu plantilla HTML
+        } else {
+            return "error";
+        }
+
     }
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
         if (error != null) {
             modelo.put("error", "usuario y contraseña invalidos");
-
         }
         return "login.html";
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @GetMapping("/home")
-    public String home (HttpSession session) {
+    public String home(HttpSession session) {
+        
+        
         Users loggedOn = (Users) session.getAttribute("usuariosession");
+
         if (loggedOn.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
 

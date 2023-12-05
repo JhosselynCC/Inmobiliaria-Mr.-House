@@ -5,8 +5,7 @@
  */
 package com.realestate.mrhouse.Repositories;
 
-import com.realestate.mrhouse.Entities.Image;
-import java.util.List;
+import com.realestate.mrhouse.Entities.OffersByProperty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,11 +13,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author 2171584201008
  */
-
 @Repository
-public interface ImageRepository extends JpaRepository<Image, String> {
+public interface OffersByPropertyRepository extends JpaRepository<OffersByProperty, Long> {
     
- 
-    List<Image> findByPropertyId(String propertyId);
-  
 }

@@ -40,20 +40,35 @@ and open the template in the editor.
                         <td th:text="${Property.typeProperty}"></td>
                         <td th:text="${Property.price}"></td>
                         <td th:text="${Property.city}"></td>
-               
 
-                <td>
 
-                    <a><img th:if="${Property.image != null}" class="logo" th:src="@{/image/photos/__${Property.id}__}"></a> 
+                        <td>
 
-                </td>
+                            <!-- <a><img th:if="${Property.image != null}" class="logo" th:src="@{/image/photos/__${Property.id}__}"></a>--> 
+                            <ul>
+                                <!--
+                                <li th:each="Property : ${properties}">
+                                    <a th:href="@{/properties/view/{id}(id=${Property.id})}" </a> <!--th:text="${Property.title}">
+                                    th:src="@{/image/view/{id}(id=${image.id})}" alt="Property Image"
+                                </li>
+                                -->
+                                 <li th:each="image : ${Property.image}">
+                                     <img th:src="@{/image/view/{id}(id=${image.id})}" alt="Property Image" />
+                                     
+                                 </li>
+                                
+    
+                           </ul>
+                        </td>
 
-                </tr>
+                    </tr>
 
                 </tbody>
             </table>
 
             <div>TODO write content</div>
         </div>
+
+        <footer th:replace="/fragments/footer::footer"> </footer>
     </body>
 </html>

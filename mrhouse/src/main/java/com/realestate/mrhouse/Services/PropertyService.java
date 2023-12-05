@@ -12,11 +12,13 @@ import com.realestate.mrhouse.Enums.TypeProperty;
 import com.realestate.mrhouse.Enums.TypePublication;
 
 import com.realestate.mrhouse.Exceptions.MyException;
+import com.realestate.mrhouse.Repositories.ImageRepository;
 import com.realestate.mrhouse.Repositories.PropertyRepository;
 import com.realestate.mrhouse.Repositories.PublishersRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -30,28 +32,41 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class PropertyService {
-    
+
     @Autowired
     private PropertyRepository propertyRepository;
     @Autowired
     private PublishersRepository publisherRepository;
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private ImageRepository imageRepository;
+    
+    
+
+    @Autowired
+    public PropertyService(PropertyRepository propertyRepository,  ImageRepository  imageRepository) {
+        this.propertyRepository = propertyRepository;
+        this.imageRepository = imageRepository;
+    }
+
+    
     
     @Transactional
     public void createProperty(List<MultipartFile> images, String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, String idPublisher) throws MyException {
-        
+
         validar(typePublication, title, typeProperty, features, price, images, location, province, city, idPublisher);
-        
+
         Publishers p = publisherRepository.findById(idPublisher).get();
         /*   autor a = autorRepositorio.findById(IdAutor).get();
                 .orElseThrow(() -> new MyException("Publisher no encontrado con ID: " + idPublisher));
          */
-        
+
         Property property = new Property();
-        
+
         property.setTypePublication(TypePublication.valueOf(typePublication));
-        
+
         property.setTitle(title);
         property.setTypeProperty(TypeProperty.valueOf(typeProperty));
         property.setFeatures(features);
@@ -60,23 +75,170 @@ public class PropertyService {
         property.setImages((List<Image>) images);
          */
         for (MultipartFile image : images) {
-            imageService.save(image, property);         
+            imageService.save(image, property);
         }
         property.setLocation(location);
         property.setProvince(province);
         property.setCity(city);
         property.setAlta(new Date());
         property.setPublishers(p);
-        
+
         propertyRepository.save(property);
     }
-    
+
     public List<Property> listProperties() {
-        List<Property> properties = new ArrayList();
-        
+
+        /* public List<Property> listProperties() {
+        List<Property> properties = new ArrayList();   
         properties = propertyRepository.findAll();
-        
         return properties;
+    }
+         */
+        
+        /*
+        List<Property> properties = new ArrayList();
+
+        for (Property property : properties) {
+            // Fetch images for each property and set them
+            // List<Object[]>imageInfoList=propertyRepository.searchImageByProperty(property.getId());
+            List<Object[]> imageInfoList = (List<Object[]>) propertyRepository.searchImageByProperty(property.getId());
+            List<Image> images = new ArrayList<>();
+
+            for (Object[] imageInfo : imageInfoList) {
+                Long imageId = (Long) imageInfo[0];
+                String contenido = (String) imageInfo[1];
+                // Assuming you have an Image class
+                Image image = new Image(imageId, contenido);
+                images.add(image);
+
+            }
+
+        }
+
+        properties = propertyRepository.findAll();
+
+        return properties;*/
+        
+            
+        return propertyRepository.findAll();
+    }
+
+    public List<Image> obtainImageByProperty(String propertyId) {
+        return imageRepository.findByPropertyId(propertyId);
+    }
+
+    
+    
+    /*
+    *Funciones para Alquilar
+    */
+    
+        public List<Property> listAlquiler() {
+        List<Property> properties = listProperties();
+
+        List<Property> alquileres = new ArrayList<>();
+
+        Iterator<Property> it = properties.iterator();
+
+        while (it.hasNext()) {
+
+            Property aux = it.next();
+
+            if (aux.getTypePublication().equals(TypePublication.ALQUILER)) {
+                alquileres.add(aux);
+            }
+
+        }
+
+        return alquileres;
+    }
+
+    public List<Property> listAlquiler3(Long id) {
+
+        int iterar = 0;
+
+        List<Property> alquileres3 = new ArrayList<>();
+
+        List<Property> alquileres = listAlquiler();
+
+        Iterator<Property> it = alquileres.iterator();
+
+        while (it.hasNext()) {
+            Property aux = it.next();
+
+
+            if (aux.getId() != id) {
+                
+                iterar += 1;
+
+                if (iterar <= 3) {
+
+                    alquileres3.add(aux);
+
+                }
+
+            }
+
+        }
+
+        return alquileres3;
+    }
+    
+    
+    
+    /*
+    *Funciones para Comprar
+    */
+    
+        public List<Property> listComprar() {
+        List<Property> properties = listProperties();
+
+        List<Property> comprar = new ArrayList<>();
+
+        Iterator<Property> it = properties.iterator();
+
+        while (it.hasNext()) {
+
+            Property aux = it.next();
+
+            if (aux.getTypePublication().equals(TypePublication.VENTA)) {
+                comprar.add(aux);
+            }
+
+        }
+
+        return comprar;
+    }
+
+    public List<Property> listComprar3(Long id) {
+
+        int iterar = 0;
+
+        List<Property> comprar3 = new ArrayList<>();
+
+        List<Property> compras = listComprar();
+
+        Iterator<Property> it = compras.iterator();
+
+        while (it.hasNext()) {
+            Property aux = it.next();
+
+
+            if (aux.getId() != id) {
+                
+                iterar += 1;
+
+                if (iterar <= 3) {
+
+                    comprar3.add(aux);
+
+                }
+
+            }
+
+        }
+
+        return comprar3;
     }
 
     /*
@@ -115,7 +277,7 @@ public class PropertyService {
     public Property getOne(Long id) {
         return propertyRepository.getOne(id);
     }
-    
+
     private void validar(String typePublication, String title, String typeProperty, String features, Double price, List<MultipartFile> images, String location, String province, String city, String idPublisher) throws MyException {
         if (typePublication == null) {
             throw new MyException("El tipo de publicacion no puede ser nulo");
@@ -132,7 +294,7 @@ public class PropertyService {
         if (price.isNaN() || price == null) {
             throw new MyException("El valor no puede ser nulo o estar vacio");
         }
-        
+
         if (images.isEmpty() || images == null) {
             throw new MyException("Las imagenes no pueden ser nulas o vacias");
         }
@@ -148,6 +310,6 @@ public class PropertyService {
         if (idPublisher == null || idPublisher.isEmpty()) {
             throw new MyException("El Id del Publisher no puede ser nulo o estar vacio");
         }
-        
+
     }
 }

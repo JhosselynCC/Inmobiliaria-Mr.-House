@@ -3,32 +3,42 @@
 
     <div class="container-fluid">
         <a href="//index.html" class="navbar-brand d-flex align-items-center">
-            <img src="/img/Logo.webp" alt="Logo de Mr. House" width="70" height="70">
+            <img src="/img/mrhouse.png" alt="Logo de Mr. House" width="150" height="70">
         </a>
         <div class="d-flex justify-content-center text-center mx-auto">
-            <a class="navbar-brand" href="/login">
-                Home
-            </a>
-            <a class="navbar-brand" href="/comprar">
-                Comprar
-            </a>
-            <a class="navbar-brand" href="/alquilar">
-                Alquilar
-            </a>
-            <a class="navbar-brand" href="/vender">
-                Publicar
-            </a>
+            <li><a class="navbar-brand" href="/">
+                    Home
+                </a></li>
+            <li><a class="navbar-brand" href="/comprar">
+                    Comprar
+                </a></li>
+            <li><a class="navbar-brand" href="/alquilar">
+                    Alquilar
+                </a></li>
+
+             <li class="nav-item dropdown">
+                        <a class="navbar-brand"  href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Publicar </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+
+                            <li><a class="dropdown-item" th:href="@{/property/register}">Crear Publicacion</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/list}">Listar Publicacion</a></li>
+                            <li><a class="dropdown-item"th:href="@{/publishers/register}">Registrarse como publicador</a></li>
+                            <li><a class="dropdown-item" th:href="@{/publishers/list}">Lista de Publicadores</a></li>
+                        </ul>
+                    </li>
+                    
+                    
         </div>
 
-        <a href="/login" class="mx-3 navbar-brand">Login</a>
+        <a href="/Ingresar" class="mx-3 navbar-brand">Login</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar" aria-label="Navegación de palanca">
+                aria-controls="offcanvasNavbar" aria-label="Navegación de palanca">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel">
+             aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

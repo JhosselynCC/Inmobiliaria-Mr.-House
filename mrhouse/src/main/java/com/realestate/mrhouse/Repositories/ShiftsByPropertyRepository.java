@@ -5,20 +5,16 @@
  */
 package com.realestate.mrhouse.Repositories;
 
-import com.realestate.mrhouse.Entities.Image;
-import java.util.List;
+import com.realestate.mrhouse.Entities.ShiftsByProperty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 
 /**
  *
  * @author 2171584201008
  */
-
 @Repository
-public interface ImageRepository extends JpaRepository<Image, String> {
+public interface ShiftsByPropertyRepository extends JpaRepository<ShiftsByProperty, Long> {
     
- 
-    List<Image> findByPropertyId(String propertyId);
-  
 }

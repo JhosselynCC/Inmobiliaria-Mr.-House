@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+.page{
+    height: 1140px;
+    display: inline-block;
+    background-color: #F2F4F3;
+   
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.page #page-2{
+    height: 875px;
+}
+
+
+.page .cont{
+    background-color: #F2F4F3;
+}
+
+
+.page #cont-1{
+    height: 790px;
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+.page #cont-2{
+    padding: 5px;
+    display: inline-block;
+    width: 1460px;
+    height: 125px;
+    background-color: #8998a1;
+    color: white;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 20px;
+    
+    font-family: 'Roboto', sans-serif;
+}
+
+.page #cont-2 #description-title{
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.page #cont-2 #description{
+    font-weight: 400;
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page #cont-3{
+    height: 300px;
+    margin-top: 15px;
+}
+
+
+.page .cont #prop-1{
+    width: 920px;
+    height: 760px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.page .cont #prop-2{
+    width: 530px;
+    height: 760px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.page #cont-1 #prop-1 #img-1{
+    width: 910px;
+    height: 560px;
+    background-color: #8998a1;
+    margin-left: 10px;
+}
+.page #cont-1 #prop-1 #img-2{
+    width: 100%;
+    height: 180px;
+    margin-top: 10px;
+    display: flex;
+}
+
+.page #cont-1 #prop-1 #img-2 .img button{
+    width: 297px;
+    height: 100%;
+    background-color: #5f6f78;
+    margin-left: 10px;
+    border: none;
+}
+
+
+
+.page .cont #prop-2 #detail-1{
+    width: 100%;
+    height: 130px;
+    background-color: #5f6f78;
+    background-color: #8998a1;
+}
+
+.page .cont #prop-2 #detail-1 #title-1{
+    width: 100%;
+    height: 25px;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: rgb(63, 66, 74);
+}
+
+.page .cont #prop-2 #detail-1 #title-2{
+    width: 100%;
+    height: 95px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+}
+
+
+
+
+
+.page .cont #prop-2 #detail-2{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    background-color: #5f6f78;
+    background-color: #8998a1;
+    
+    padding-left: 5px;
+    padding-right: 5px;
+    
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.page .cont #prop-2 #detail-3{
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    background-color: #5f6f78;
+    background-color: #8998a1;
+    color: rgb(63, 66, 74);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.page .cont #prop-2 #detail-3 .division-features{
+    height: 81px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.page .cont #prop-2 #detail-3 .division-features .info{
+    width: 255px;
+    height: 35px;
+    padding-left: 5px;
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page .cont #prop-2 #detail-4{
+    background-color: #5f6f78;
+    height: 200px;
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    color: white;
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page .cont #prop-2 #detail-5 {
+    height: 60px;
+    padding-top: 7px;
+    background-color: #F2F4F3;
+}
+
+.page .cont #prop-2 #detail-5 button {
+    background-color: rgb(63, 66, 74);
+    height: 45px;
+    width: 530px;
+    color: white;
+}
+
+.page .cont #prop-2 #detail-5 button a{
+    text-decoration: none;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page .cont #prop-2 #detail-6{
+    background-color: #5f6f78;
+    height: 140px;
+    display: flex;
+}
+
+.page .cont #prop-2 #detail-6 #img-user{
+    background-color: #8998a1;
+    height: 140px;
+    width: 140px;
+}
+
+.page .cont #prop-2 #detail-6 #name-user{
+    padding: 20px;
+    padding-top: 53px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page #cont-3 #title{
+    background-color: #F2F4F3;
+    padding-left: 20px;
+    padding-top: 17px;
+    width: 100%;
+    height: 70px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: rgb(34, 36, 41);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page #cont-3 #cards{
+    background-color: #F2F4F3;
+    margin-top: 16px;
+    padding-left: 10px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+}
+
+.page #cont-3 #cards .card-1 a{
+    background-color: #5f6f78;
+    width: 484px;
+    height: 100%;
+    margin-right: 10px;
+    display: flex;
+    cursor: pointer;
+}
+
+
+.page #cont-3 #cards .card-1 a{
+    text-decoration: none;
+}
+
+
+
+
+.page #cont-3 #cards .card-1 a .card-detail{
+    
+    width: 90px;
+    height: 200px;
+}
+
+.page #cont-3 #cards .card-1 a #card-detail-img{
+    background-color: #8998a1;
+    width: 300px;
+    height: 100%;
+}
+
+.page #cont-3 #cards .card-1 a #card-detail-description{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: white;
+    width: 200px;
+    height: 100%;
+    padding: 5px;
+}
+
+.page #cont-3 #cards .card-1 a #card-detail-description .card-title-description{
+    
+    width: 100px;
+    height: 90px;
+    
+}
+
+.page #cont-3 #cards .card-1 a #card-detail-description .card-price{
+    display: flex;
+}
+
+footer{
+    margin-top: 40px;
+}
+
+
+

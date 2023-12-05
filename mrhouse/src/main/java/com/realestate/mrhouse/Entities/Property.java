@@ -5,13 +5,19 @@
  */
 package com.realestate.mrhouse.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.realestate.mrhouse.Enums.StatusProperty;
 import com.realestate.mrhouse.Enums.TypeProperty;
 import com.realestate.mrhouse.Enums.TypePublication;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,11 +34,9 @@ import javax.persistence.TemporalType;
 @Entity
 public class Property {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private TypePublication typePublication;
@@ -41,18 +45,18 @@ public class Property {
 
     @Enumerated(EnumType.STRING)
     private TypeProperty typeProperty;
-    
+
     private String features;
     private Double price;
 
-    @OneToMany
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Image> image;
- 
-   /*
+
+    /*
      @OneToOne
     private Image image;
-  */ 
-
+     */
     private String location;
     private String province;
     private String city;
@@ -62,16 +66,30 @@ public class Property {
 
     @Temporal(TemporalType.DATE)
     private Date alta;
+    
+    //Estos datos fueron agregados para completar 
+
+    @Enumerated(EnumType.STRING)
+    private StatusProperty StatusProperty;
+
+    @Column(name = "active", nullable = false)
+    private boolean active;
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OffersByProperty> OffersByProperty = new ArrayList<>();
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShiftsByProperty> ShiftsByProperty = new ArrayList<>();
 
     public Property() {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(Long Id) {
-        this.Id = Id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public TypePublication getTypePublication() {
@@ -161,7 +179,37 @@ public class Property {
     public void setAlta(Date alta) {
         this.alta = alta;
     }
-    
-  
+
+    public StatusProperty getStatusProperty() {
+        return StatusProperty;
+    }
+
+    public void setStatusProperty(StatusProperty StatusProperty) {
+        this.StatusProperty = StatusProperty;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = true;
+    }
+
+    public List<OffersByProperty> getOffersByProperty() {
+        return OffersByProperty;
+    }
+
+    public void setOffersByProperty(List<OffersByProperty> OffersByProperty) {
+        this.OffersByProperty = OffersByProperty;
+    }
+
+    public List<ShiftsByProperty> getShiftsByProperty() {
+        return ShiftsByProperty;
+    }
+
+    public void setShiftsByProperty(List<ShiftsByProperty> ShiftsByProperty) {
+        this.ShiftsByProperty = ShiftsByProperty;
+    }
 
 }

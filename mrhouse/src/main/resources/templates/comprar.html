@@ -7,8 +7,21 @@
 
     <body>
         <header>
-            <nav th:replace="/fragments/navbar::nav"></nav>
+            <div>
+                <nav th:replace="/fragments/navbar::nav"></nav>
+            </div>
+        </header>
 
+
+
+
+        <div class="container mt-5">
+            
+
+            <h1 class="display-1">
+                Bienvenido a Mr. House</h1>
+            <p class="lead">Tu inmobiliaria en Línea</p>
+            <h2>Propiedades en venta</h2>
             <div class="user-select py-1 mb-3 border-bottom">
                 <input type="text" name="ubicación" placeholder="¿Dónde quieres mudarte?">
                 <select class="user-select justify-content-between" name="Tipo de propiedad">
@@ -23,114 +36,134 @@
                     <option class="user-select">Otros filtros</option>
                 </select>
             </div>
-
-
-            <h1 class="display-3">Bienvenido a Mr. House</h1>
-            <p class="lead">Tu inmobiliaria en Línea</p>
-
-
-        </header>
-
-
-        <main class="container m-5">
-
-            <h2>Propiedades</h2>
-
             <div class="row text-center">
 
 
-                <div class="col-lg-3 col-md-6 mb-44">
+                <div class="row d-flex align-items-center justify-content-center">
 
-                    <div class="card h-100">  
-                        <div>
-                        <div th:each="Property : ${properties}">
-                             <a><img th:if="${Property.image != null}" class="logo" th:src="@{/image/photos/__${Property.id}__}"></a> 
-                            <img class="card-img-top"> <!--th:src="${p.image.contenido}"-->
+                    <div class="col-lg-3 col-md-6 mb-44" th:each="Property : ${properties}">
+                        <div class="card p-1 col-12 m-5" th:objecto="Property"> <!--th:if="${Property.typePublication == 'VENTA'}"-->
+                            <a><img class="card-img-top" th:src="@{/image/view/__${Property.image[0].id}__}"></a>
+                            <!--<img class="card-img-top"> th:src="${p.image.contenido}"-->
                             <div class="card-body">
                                 <p class="card-text" th:text="${Property.title}"></p>
                                 <p class="card-text" th:text="${Property.price}"></p>
+                                <p class="card-text" th:text="${Property.province}"></p>
+                                <p class="card-text" th:text="${Property.location}"></p>
                                 
-                               
                             </div>
                             <div class="card-footer">
-                               <!-- <a th:href="" class="btn btn-success">Ver inmueble</a>-->
+                                
+                                 <a th:href="@{/comprar/property/__${Property.id}__}" class="btn btn-success">Ver inmueble</a>
                             </div>
-                         </div>
                         </div>
+
                     </div>
                 </div>
-
-
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="" alt="">
-
-                        <p class="card-text">Nombre del producto.</p>
-
-                        <div class="card-footer">
-                            <a href="" class="btn btn-success">Ver producto</a>
-                        </div>
-                    </div>
+            </div>
+            <p>
+                Mostrando <span th:text="${page.size}"></span> de <span th:text="${page.totalElements}"></span> registros
+            </p>
+            <nav aria-label="Page navigation" class="d-flex justify-content-between">
+                <div>
+                    <select id="pageSize" name="size" class="form-control" onchange="changePageSize">
+                        <option th:each="size : ${pageSizeOptions}" th:value="${size}"
+                                th:text="${size}" th:selected="${page.size == size}"></option>
+                    </select>
                 </div>
+                <ul class="pagination mb-0">
+                    <li class="page-item" th:classappend="${page.first} ? 'disabled' : ''"><a
+                            class="page-link" th:href="@{'?page=0&size=' + ${page.size}}">First</a>
+                    </li>
+                    <li class="page-item" th:classappend="${page.first} ? 'disabled' : ''"><a
+                            class="page-link" th:with="prevPage=${page.number - 1}"
+                            th:href="@{'?page=' + ${prevPage} + '&size=' + ${page.size}}">Prev</a>
+                    </li>
+                    <li class="page-item" th:each="i : ${pageNumbers}"
+                        th:classappend="${i == page.number + 1} ? 'active' : ''"><a
+                            class="page-link" th:with="pageNum=${i-1}"
+                            th:href="@{'?page=' + ${pageNum} + '&size=' + ${page.size}}"
+                            th:text="${i}"></a>
+                    </li>
+                    <li class="page-item"
+                        th:classappend="${page.last} ? 'disabled' : ''"><a
+                            class="page-link" th:with="nextPage=${page.number + 1}"
+                            th:href="@{'?page=' + ${nextPage} + '&size=' + ${page.size}}">Next</a>
+                    </li>
+                    <li class="page-item"
+                        th:classappend="${page.last} ? 'disabled' : ''"><a
+                            class="page-link" th:with="lastPage=${page.totalPages - 1}"
+                            th:href="@{'?page=' + ${lastPage} + '&size=' + ${page.size}}">Last</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                        <div class="card-body">
-                            <p class="card-text">Nombre del producto.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-success">Ver producto</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                        <div class="card-body">
-                            <p class="card-text">Nombre del producto.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-success">Ver producto</a>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-        </main>
+        <!--<div class="container m-5">
+          
+                      <h2 class="mb-4 text-center">Inmuebles en venta</h2>
+          
+                      <div class="row d-flex align-items-center justify-content-center">
+          
+          
+                          <div class="card p-1 col-12 col-sm-6 col-lg-4 col-xl-3 m-3" th:each="property : ${properties}" th:if="${property.typePublication == 'VENTA'}">
+                              <div class="position-relative" style="height:250px">
+                                  <a><img th:if="${property.image != null}" class="logo" th:src="@{/image/photos/__${property.id}__}"></a> 
+                                  <img class="card-img-top"> th:src="${p.image.contenido}"
+                                  <div class="card-body">
+                                      <p class="card-text" th:text="${property.title}"></p>
+                                      <p class="card-text" th:text="${property.price}"></p>
+                                      <p class="card-text" th:text="${property.province}"></p>
+                                      <p class="card-text" th:text="${property.location}"></p>
+                                  </div>
+                                  <div class="card-footer">
+               <a th:href="" class="btn btn-success">Ver inmueble</a>
+          </div>
+      </div>
+      </div>
+      </div>
+      </div>-->
 
         <!--
-          <div layout:fragment="content">
-                <h4>Propiedades e inmuebles</h4>
-                <div class="row">
-                  <div class="col-md-3 my-5" th:each="property : ${properties}" th:object="${property}">
-                    <a th:href="@{/properties/{id}(id=*{id})}" class="card shadow-lg" style="text-decoration: none;"><img
-                        th:src="@{/image/photos/__${Property.id}__}" class="card-img-top">
-                      <div class="card-body">
-                        <h2 class="card-title fs-6" th:text="*{titulo}"></h2>
-                        <p th:text="${price}"></p>
-                        <p th:text="${location,province,city,features}" class="text-muted-small"></p>
+                <div layout:fragment="content">
+                      <h4>Propiedades e inmuebles</h4>
+                      <div class="row">
+                        <div class="col-md-3 my-5" th:each="property : ${properties}" th:object="${property}">
+                          <a th:href="@{/properties/{id}(id=*{id})}" class="card shadow-lg" style="text-decoration: none;"><img
+                              th:src="@{/image/photos/__${Property.id}__}" class="card-img-top">
+                            <div class="card-body">
+                              <h2 class="card-title fs-6" th:text="*{titulo}"></h2>
+                              <p th:text="${price}"></p>
+                              <p th:text="${location,province,city,features}" class="text-muted-small"></p>
+                            </div>
+                          </a>
+                        </div>
                       </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="row mt-5" th:with="page=${properties}">
-                  <div class="col-sm-6">
-                    <div sd:pagination-sumary></div>
-                    <div class="col-sm-6">
-                      <nav>
-                        <ul class="pagination" sd:pagination="full"></ul>
-                      </nav>
+                      <div class="row mt-5" th:with="page=${properties}">
+                        <div class="col-sm-6">
+                          <div sd:pagination-sumary></div>
+                          <div class="col-sm-6">
+                            <nav>
+                              <ul class="pagination" sd:pagination="full"></ul>
+                            </nav>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-        
-        
-        
-        
-          Footer -->
+              
+              
+              
+              
+                Footer -->
         <footer th:replace="/fragments/footer::footer"> </footer>
+        <script>
+            function changePageSize() {
+                const pageSize = document.getElementById("pagesize").value;
+                const currentPage = [[${page.number}]];
+                window.location.href = "?page="+currentPage + "&size=" + pageSize;
+            }
+        </script>
         <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -141,13 +174,5 @@
                 integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
     </body>
+
 </html>
-
-
-
-
-
-
-
-
-

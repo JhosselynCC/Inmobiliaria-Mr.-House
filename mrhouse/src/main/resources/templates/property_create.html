@@ -162,7 +162,7 @@ and open the template in the editor.
 
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Imagen del Inmueble</label>
-                               <!-- <input type="file" class="form-control" aria-label="file example" name="images" >-->
+                                <!-- <input type="file" class="form-control" aria-label="file example" name="images" >-->
                                 <input type="file" multiple name="images" class="form-control" id="files" accept="images/*" required>
                                 <div class="invalid-feedback">Example invalid form file feedback</div>
                             </div>
@@ -201,12 +201,7 @@ and open the template in the editor.
 
             </section>
         </main>
-        <footer class="text-muted py-5">
-            <div class="containerFooter">
-                <p class="mb-1">Mr.House servicios inmobiliarios 2023</p>            
-            </div>
-
-        </footer>
+        <footer th:replace="/fragments/footer::footer"> </footer>
     </body>
 
 </html>

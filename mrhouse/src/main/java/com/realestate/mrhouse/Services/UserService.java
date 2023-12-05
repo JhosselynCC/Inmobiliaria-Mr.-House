@@ -51,9 +51,10 @@ public class UserService implements UserDetailsService {
 
         user.setName(name);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        //user.setPassword(password);
         user.setDni(dni);
-        //user.setPassword(new BCryptPasswordEncoder().encode(password));
+        
         user.setRol(rol);
 
         userRepository.save(user);
@@ -96,11 +97,11 @@ public class UserService implements UserDetailsService {
             List<GrantedAuthority> permissions = new ArrayList();
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
             permissions.add(p);
-            /*
+          
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("usuariosession", u);
-             */
+            
             return new User(u.getEmail(), u.getPassword(), permissions);
 
         } else {
@@ -108,5 +109,6 @@ public class UserService implements UserDetailsService {
         }
 
     }
+
 
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <h2>Actualiza la oferta   aqui </h2>
+            </div>
+        </header>
+
+        <div class="container">
+
+            <form th:action= "@{/property/modifyOffer/__${OffersByProperty.Id}__}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">                 
+
+                    <input hidden th:value="${Id}" name="Id">
+
+                    <div class="form-group my-3">
+                        <select name="IdProperty">
+                            <option>Seleccionar Id propiedad</option>
+                            <option th:each="Property : ${properties}"
+                                    th:value="${Property.Id}"
+                                    th:selected="${Property.Id==OffersByProperty.property.Id}"
+                                    th:text="${Property.Id}"
+                                    />
+                        </select>
+                    </div>
+                    
+                    
+                    <textarea class="form-group" th:value="${OffersByProperty.message}" type="text"  name="message" placeholder="message" rows="4" cols="50" ></textarea>
+                    <input th:value="${OffersByProperty.userEmail}" type="text" class="form-group" name="userEmail" placeholder="userEmail">
+
+                    <div class="">
+                        <select class="form-select mb-3" name="statusOffer">
+                            <option th:each="statusOffer : ${T(com.realestate.mrhouse.Enums.StatusOffer).values()}"
+                                    th:value="${statusOffer}" th:text="${statusOffer}"></option>
+                        </select>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary"> Actualizar</button>
+            </form>
+
+            <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+                <div class="card-body">
+                    <h5 class="card-title">Error 👎</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+
+            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                <div class="card-body">
+                    <h5 class="card-title">Exito!</h5>
+                    <p class="card-text" th:text="${exito}"></p>
+                </div>
+            </div>
+
+            <section class=" text-center container">
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+
+
+        <footer th:replace="/fragments/footer::footer"> </footer>
+    </body>
+</html>
