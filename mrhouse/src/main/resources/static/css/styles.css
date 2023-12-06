@@ -1,4 +1,4 @@
-.bg-venta {
+/* .bg-venta {
     background: rgb(33,37,41);
     background: linear-gradient(180deg, rgba(33,37,41,1) 56%, rgba(59,66,73,1) 100%); 
 }
@@ -17,4 +17,83 @@
 .header{
     background-color: #22333B;
     text-align: center;
+} */
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
+footer {
+    border-top: 1px solid #dadada;
+    background-color: rgb(255, 255, 255);
+    padding-top: 20px;
+    /* text-align: center; */
+    /* height: 100px; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* height: 50px; */
+}
+
+.imagenFondo {
+    background-image: url(https://images.unsplash.com/photo-1524026986132-000404263b59?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: cover;
+    /* Cubre todo el div */
+    background-repeat: no-repeat;
+    /* Evita que la imagen se repita */
+    background-position: center 60%;
+    /* Posiciona la imagen en el centro */
+    /* opacity: 0.1; */
+    background-blend-mode: overlay;
+
+    /* Capa semitransparente */
+    background-color: rgba(55, 155, 255, 0.75);
+    /* Color blanco con 50% de opacidad */
+
+    /* Añade altura y ancho para visualizar la imagen */
+    width: 100%;
+}
+
+.containerHeader {
+    height: 30vh;
+    max-height: 200px;
+}
+
+.nav-item1 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-right: 2em;
+}
+
+.nav-item1 .nav-link {
+    position: relative;
+    text-decoration: none;
+}
+
+.nav-item1 .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: rgb(187, 187, 187);
+    /* Color del subrayado */
+    transition: width 0.3s ease-in-out;
+    flex-direction: row;
+}
+
+.nav-item1 .nav-link:hover::after {
+    width: 100%;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+.navbar1 {
+    flex-direction: row;
 }

@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeLeaf.org">
 
-<head>
-    <meta charset="utf-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Real State Mr.House</title>
+<head th:replace="/fragments/head::head">
 
     <link rel="icon" href="/img/Logo.webp" type="image/x-icon">
     <!-- <link href="css/one-page-wonder.min.css" rel="stylesheet"> -->
@@ -21,7 +17,7 @@
 </head>
 
 <body>
-    <nav th:replace="/fragments/navbar :: nav"></nav>
+    <header th:replace="/fragments/header :: header"></header>
 
 
     <div class="page">
@@ -56,6 +52,7 @@
 
 
     <footer th:replace="/fragments/footer :: footer"></footer>
+    <script th:replace="/fragments/script :: script"></script>
 
 </body>
 

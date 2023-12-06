@@ -1,122 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/style.css">
+<!-- Head -->
+<head th:replace="/fragments/head::head">
 
+    <!-- Las siguientes lineas son solamente para que funcionen los estilos al trabajar con vsc -->
+    <!-- Boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Boostrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <!-- CSS Personalizado -->
+    <link href="../../resources/static/css/styles.css" rel="stylesheet">
 
-        <title>MrHouse</title>
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <!--NAVEGADOR-->
+    <!-- Header, Navbar -->
+    <header th:replace="/fragments/header::header"></header>
 
-        <header class="header">
-            <div class="logo" href="#">
-                <img src="/img/mrhouse.png" alt="logoMrHouse">
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/">HOME</a></li>
-                    <li><a href="/comprar">COMPRAR</a></li>
+    <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
+    <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
+    <main>
 
+        <section>
 
+            <section class="container-xxl imagenFondo">
 
-                    <li><a href="/alquilar">ALQUILAR</a></li>
-                    <li><a href="/blog">BLOG</a></li>
-                    <li><a href="/contacto">CONTACTO</a></li>
+                <div class="row p-5">
+                    <div class="col-12 containerHeader">
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"  href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Publicar </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <h1>Lorem ipsum dolor sit amet.</h1>
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <img src="..." class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <h1>Lorem ipsum dolor sit amet.</h1>
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <img src="..." class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <h1>Lorem ipsum dolor sit amet.</h1>
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <img src="..." class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                        </div>
 
-                            <li><a class="dropdown-item" th:href="@{/property/register}">Crear Publicacion</a></li>
-                            <li><a class="dropdown-item" th:href="@{/property/list}">Listar Publicacion</a></li>
-                            <li><a class="dropdown-item"th:href="@{/publishers/register}">Registrarse como publicador</a></li>
-                            <li><a class="dropdown-item" th:href="@{/publishers/list}">Lista de Publicadores</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <a href="/register" class="btn"><button>REGISTRAR</button></a>
-        </header>
-
-        <!--TITULO-->
-
-        <div class="titulo">
-            <h1>Mr. HOUSE</h1>
-            <h2>La propiedad que busques esta aquí</h2>
-        </div>
-
-        <!--CARRUSEL-->
-
-        <div class="slider-box">
-            <ul>
-                <li id="img1">
-                    <img src="img/alquiler.jpg" alt="IMG_1" href="#">
-
-                    <div class="texto"> <!-- Div es solo para el texto -->
-                        <h2>Alquileres</h2>
-                        <p>
-                            Ingresa a aquí para poder ver todos ofertas de alquileres que se encuentren disponibles.
-                        </p>
                     </div>
-                </li>
-                <li id="img2">
+                </div>
 
-                    <img src="img/Venta.jpg" alt="IMG_2" href="#">
-                    <div class="texto" >
-                        <h2>Ventas</h2>
-                        <p>
-                            Ingrese para poder visualizar todas las ofertas en venta de propiedades
-                        </p>
-                    </div>
+            </section>
 
-                </li>
-                <li id="img3">
+    </main>
+<!-- Fin de Main -->
+<!-- Fin de Main -->
 
-                    <img src="img/Dueños.jpg" alt="IMG_3" href="#">
-                    <div class="texto" >
-                        <h2>Dueños</h2>
-                        <p>
-                            Ingreso para dueños de las propiedades, donde podrán ofertar y mostrar sus propiedades al público en general.
-                        </p>
-                    </div>
-
-                </li>
-                <li id="img4">
-
-                    <img src="img/loginCasa.JPG" alt="IMG_4" href="#">
-                    <div class="texto" >
-                        <h2>LOGIN</h2>
-                        <p>
-                            Registrate para poder ofertar o para poder buscar tu proximo hogar.
-
-                        </p>
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="navigation-manual">
-            <a href="#img1" class="manual-btn"></a>
-            <a href="#img2" class="manual-btn"></a>
-            <a href="#img3" class="manual-btn"></a>
-            <a href="#img4" class="manual-btn"></a>
-        </div>
+    <!-- Footer -->
+    <footer th:replace="/fragments/footer::footer"></footer>
 
 
-
-
-      <footer th:replace="/fragments/footer::footer"> </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
-
-    </body>
+    <!-- Script de Boostrap.js -->
+    <script th:replace="/fragments/script::script"></script>
+</body>
 
 </html>
