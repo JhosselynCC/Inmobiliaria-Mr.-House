@@ -1,8 +1,16 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html xmlns:th="http://www.thymeLeaf.org">
     <head th:replace="/fragments/head::head"></head>
     <nav th:replace="/fragments/navbar::nav"></nav>
 
+=======
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/fragments/head::head"></head>
+    <header th:replace="/fragments/header::header"></header>
+    </div>
+    
+>>>>>>> f78bf91f6ebfb8c3db77dfdc405e9d27cd51c0f4
     <!--CUADRO SUPERIOR-->
 
     <main class="container mt-5" >
@@ -160,7 +168,14 @@
 
             </div>
 
+<<<<<<< HEAD
             <!-- IZQUIERDAD - INFERIOR -->
+=======
+      <footer th:replace="/fragments/footer::footer">    </footer>
+      <script th:replace="/fragments/script::script">    </script>
+      
+</body>
+>>>>>>> f78bf91f6ebfb8c3db77dfdc405e9d27cd51c0f4
 
             <div class="col-md-6" >           
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">            

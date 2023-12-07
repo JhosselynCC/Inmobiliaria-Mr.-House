@@ -6,10 +6,7 @@
 
 
     <body>
-        <header>
-            <div>
-                <nav th:replace="/fragments/navbar::nav"></nav>
-            </div>
+        <header th:replace="/fragments/header::header">
         </header>
 
 
@@ -157,6 +154,7 @@
               
                 Footer -->
         <footer th:replace="/fragments/footer::footer"> </footer>
+        <script th:replace="/fragments/script::script"></script>
         <script>
             function changePageSize() {
                 const pageSize = document.getElementById("pagesize").value;
