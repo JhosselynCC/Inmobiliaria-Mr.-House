@@ -9,12 +9,14 @@ import com.realestate.mrhouse.Entities.Users;
 import com.realestate.mrhouse.Exceptions.MyException;
 import com.realestate.mrhouse.Relations.Rol;
 import com.realestate.mrhouse.Services.UserService;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,8 +85,6 @@ public class PortalController {
     @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @GetMapping("/home")
     public String home(HttpSession session) {
-        
-        
         Users loggedOn = (Users) session.getAttribute("usuariosession");
 
         if (loggedOn.getRol().toString().equals("ADMIN")) {
@@ -93,4 +93,72 @@ public class PortalController {
         }
         return "home.html";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ADMIN')")
+    @GetMapping("/profile")
+    public String profile(ModelMap modelo, HttpSession session) {
+        Users user = (Users) session.getAttribute("usuariosession");
+        modelo.put("user", user);
+
+        return "user_modify.html";
+
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ADMIN')")
+    @PostMapping("/profile/{id}")
+    public String update(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
+            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
+
+        try {
+            userService.actualizar(id, name, email, password, password2, dni, rol);
+            modelo.put("exito", "usuario fue actualizado correctamente");
+            return ("/home.html");
+        } catch (MyException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("name", name);
+            modelo.put("email", email);
+            return "user_modify.html";
+        }
+
+    }
+
+    //list
+    @GetMapping("/listUsers")
+    public String listUsers(ModelMap modelo) {
+        List<Users> users = userService.listUsers();
+        modelo.addAttribute("users", users);
+        return "user_list.html";
+    }
+    
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @GetMapping("/users/modify/{id}")
+    public String userModify(ModelMap modelo, @PathVariable Long id) {
+        Users users = userService.getOne(id);
+        modelo.put("users", users);
+
+        return "user_modify.html";
+
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PostMapping("/users/modify/{id}")
+    public String userModify(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
+            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
+
+        try {
+            
+            userService.actualizar(id, name, email, password, password2, dni, rol);
+            modelo.put("exito", "usuario fue actualizado correctamente");
+            return ("/panel.html");
+        } catch (MyException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("name", name);
+            modelo.put("email", email);
+            return "user_modify_admin.html";
+        }
+
+    }
+     
+
 }

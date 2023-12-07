@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <!-- Head -->
@@ -22,23 +23,44 @@
         <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
         <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
         <main>
-            
-            <h1>Reservar turno</h1>
+
+            <h1>Actualizar estado de los turnos</h1>
 
             <div class="container">
 
-                <form th:action= "@{/property/shiftsRegistration/__${id }__}" method="POST">
+                <form th:action= "@{/property/modifyShift/__${ShiftsByProperty.Id}__}" method="POST" enctype="multipart/form-data">
                     <div class="form-group">                 
 
-                        <input type="hidden" name="id" th:value="${id}">
-                        <!-- <input type="text" class="form-group" name="IdProperty" placeholder="Propiedad">-->
+                        <input hidden th:value="${Id}" name="Id">
 
-                        <label for="startTime">Selecciona la fecha y hora de inicio:</label>
-                        <input type="datetime-local" id="startTime" name="startTime" required>
+                        <div class="form-group my-3">
+                            <select name="IdProperty">
+                                <option>Seleccionar Id propiedad</option>
+                                <option th:each="Property : ${properties}"
+                                        th:value="${Property.Id}"
+                                        th:selected="${Property.Id==ShiftsByProperty.property.Id}"
+                                        th:text="${Property.Id}"
+                                        />
+                            </select>
+                        </div>                       
+                        <br>
+                        <input th:value="${ShiftsByProperty.userEmail}" type="text" class="form-group" name="userEmail" placeholder="userEmail">
+
+                        <input th:value="${ShiftsByProperty.startTime}"  type="datetime-local" id="startTime" name="startTime" required>
+                        
+                        <div class="">
+                            <br>
+                            <select class="form-select mb-3" name="shiftStatus">
+                                <option th:each="shiftStatus : ${T(com.realestate.mrhouse.Enums.ShiftStatus).values()}"
+                                        th:value="${shiftStatus}" th:text="${shiftStatus}"></option>
+                            </select>
+                        </div>
 
                     </div>
-                    <button type="submit" class="btn btn-primary"> Subir</button>
+                    <button type="submit" class="btn btn-primary"> Actualizar</button>
                 </form>
+
+
 
                 <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
                     <div class="card-body">
@@ -65,6 +87,8 @@
 
             </div>
 
+
+
         </main>
         <!-- Fin de Main -->
         <!-- Fin de Main -->
@@ -76,4 +100,5 @@
         <!-- Script de Boostrap.js -->
         <script th:replace="/fragments/script::script"></script>
     </body>
+
 </html>

@@ -36,7 +36,7 @@ public class ComprarController {
     @GetMapping("")
     public String list(@PageableDefault(size = 10, page = 0) Pageable pageable, ModelMap modelo, Model model) {
 
-        List<Property> properties = propertyService.listProperties();
+        List<Property> properties = propertyService.listComprar();
         Page<Property> page = propertyRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
 
         modelo.addAttribute("properties", properties);

@@ -54,13 +54,43 @@ public class UserService implements UserDetailsService {
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         //user.setPassword(password);
         user.setDni(dni);
-        
+
         user.setRol(rol);
 
         userRepository.save(user);
 
         emailService.sendEmail(email, "bienvenido/a- " + name,
                 "su usuario fue creado correctamente y vinculado al correo electronico " + email);
+    }
+
+    @Transactional
+    public void actualizar(Long idUser, String name, String email, String password, String password2, Long dni, Rol rol) throws MyException {
+        validation(name, email, password, password2, dni, rol);
+
+        Optional<Users> reply = userRepository.findById(idUser);
+
+        if (reply.isPresent()) {
+
+            Users u = reply.get();
+            u.setName(name);
+            u.setEmail(email);
+            u.setPassword(new BCryptPasswordEncoder().encode(password));
+            u.setRol(rol);
+
+        }
+
+    }
+
+    public List<Users> listUsers() {
+
+        List<Users> users = new ArrayList();
+        users = userRepository.findAll();
+        return users;
+    }
+
+    public Users getOne(Long id) {
+        return userRepository.getOne(id);
+              
     }
 
     private void validation(String name, String email, String password, String password2, Long dni, Rol rol) throws MyException {
@@ -97,11 +127,11 @@ public class UserService implements UserDetailsService {
             List<GrantedAuthority> permissions = new ArrayList();
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
             permissions.add(p);
-          
+
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("usuariosession", u);
-            
+
             return new User(u.getEmail(), u.getPassword(), permissions);
 
         } else {
@@ -109,6 +139,5 @@ public class UserService implements UserDetailsService {
         }
 
     }
-
 
 }

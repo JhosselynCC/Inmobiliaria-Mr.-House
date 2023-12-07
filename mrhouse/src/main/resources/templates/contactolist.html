@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+    <head th:replace="/fragments/head::head">
+        <title>Contacto Mr.House</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/contacto.css">
+    </head>
+    <body>
+        <header th:replace="/fragments/header::header"></header>
+            <div>
+                <table class="table table-dark table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Fecha</th>
+                          <th hidden scope="col">ID</th>
+                          <th scope="col">Nombre y Apellido</th>
+                          <th scope="col">Motivo</th>
+                          <th scope="col">Mensaje</th>
+                          <th scope="col">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody th:each="contacto : ${contactos}">
+                        <tr>
+                            <th scope="row" th:text="${contacto.alta}"></th>
+                            <td hidden th:text="${contacto.id}"></td>  
+                          <td th:text="${contacto.nombre}"></td>
+                          <td th:text="${contacto.typeContacto}"></td>
+                          <td th:text="${contacto.mensaje}"></td>
+                          <td>
+                              <a th:href="@{/contacto/ver/__${contacto.id}__}"><i class="bi bi-search"></i> </i> Ver </a>
+                          </td>    
+                        </tr>
+                      </tbody>
+                </table>
+            </div>
+        <footer th:replace="/fragments/footer::footer"> </footer>
+        <script th:replace="/fragments/script:: script"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>

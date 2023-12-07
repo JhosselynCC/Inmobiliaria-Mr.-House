@@ -57,7 +57,7 @@ public class OffersByPropertyService {
             // getId());  // Asume que tu UserDetails tiene un método getId()
         } else {
             // Manejar el caso en el que no se puede obtener el usuario autenticado
-            throw new MyException("No se puede obtener el usuario autenticado.");
+            throw new MyException("Necesitas estar registrado para poder realizar esta operacion.");
         }
 
         offersByProperty.setStatusOffer(StatusOffer.PENDIENTE);

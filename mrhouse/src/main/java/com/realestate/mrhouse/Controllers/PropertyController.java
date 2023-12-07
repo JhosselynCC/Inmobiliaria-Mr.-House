@@ -9,6 +9,7 @@ import com.realestate.mrhouse.Entities.Image;
 import com.realestate.mrhouse.Entities.OffersByProperty;
 import com.realestate.mrhouse.Entities.Property;
 import com.realestate.mrhouse.Entities.Publishers;
+import com.realestate.mrhouse.Entities.ShiftsByProperty;
 import com.realestate.mrhouse.Exceptions.MyException;
 import com.realestate.mrhouse.Services.OffersByPropertyService;
 import com.realestate.mrhouse.Services.PropertyService;
@@ -112,12 +113,11 @@ public class PropertyController {
 
     /**
      * Controlamos las ofertas por propiedad
+     *
      */
     //create
-    @GetMapping("/offers")
-
-    public String offers(ModelMap modelo) {
-
+    @GetMapping("/offers/{id}")
+    public String offers(@PathVariable Long id, ModelMap modelo) {
         List<Property> properties = propertyService.listProperties();
         modelo.addAttribute("properties", properties);
 
@@ -126,11 +126,11 @@ public class PropertyController {
 
     @PostMapping("/offersRegistration/{id}")
 
-    public String offersRegistration(@PathVariable Long IdProperty, @RequestParam String message,
+    public String offersRegistration(@PathVariable Long id, @RequestParam String message,
             ModelMap modelo) {
-
+        System.out.println(id + " " + message);
         try {
-            offersByProperyService.createOffersByProperty(IdProperty, message);
+            offersByProperyService.createOffersByProperty(id, message);
             modelo.put("exito", "la oferta  fue cargado correctamente");
         } catch (MyException ex) {
             List<Property> properties = propertyService.listProperties();
@@ -156,17 +156,12 @@ public class PropertyController {
 
     public String modifyOffer(@PathVariable Long Id, ModelMap modelo) {
         modelo.put("OffersByProperty", offersByProperyService.getOne(Id));
-
         List<Property> properties = propertyService.listProperties();
-
         modelo.addAttribute("properties", properties);
-
         return "offersByProperty_modify.html";
-
     }
 
     @PostMapping("/modifyOffer/{Id}")
-
     public String modifyOffer(@PathVariable Long Id, Long IdProperty, String message, String userEmail, String statusOffer, ModelMap modelo) {
         try {
             offersByProperyService.modifyOffersByProperty(Id, IdProperty, message, userEmail, statusOffer);
@@ -185,28 +180,23 @@ public class PropertyController {
      * Controlamos los turnos por propiedad
      */
     //create
-    @GetMapping("/shifts")
-
-    public String shifts(ModelMap modelo) {
-
+    @GetMapping("/shifts/{id}")
+    public String shifts(@PathVariable Long id, ModelMap modelo) {
         List<Property> properties = propertyService.listProperties();
         modelo.addAttribute("properties", properties);
-
         return "shiftsByProperty_create.html";
     }
 
-    @PostMapping("/shiftsRegistration")
-
-    public String shiftsRegistration(@RequestParam Long IdProperty, @RequestParam("startTime") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") String startTimeString,
+    @PostMapping("/shiftsRegistration/{id}")
+    public String shiftsRegistration(@PathVariable Long id, @RequestParam("startTime") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") String startTimeString,
             ModelMap modelo) throws ParseException {
-
         // Parsear la cadena a un objeto Date
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         Date startTime;
 
         try {
             startTime = dateFormat.parse(startTimeString);
-            shiftsByPropertyService.createShiftsByProperty(IdProperty, startTime);
+            shiftsByPropertyService.createShiftsByProperty(id, startTime);
             modelo.put("exito", "El turno fue cargado correctamente");
 
         } catch (MyException ex) {
@@ -214,12 +204,54 @@ public class PropertyController {
             modelo.addAttribute("properties", properties);
 
             modelo.put("error", ex.getMessage());
-            
+
             Logger.getLogger(PropertyController.class.getName()).log(Level.SEVERE, null, ex);
             return "shiftsByProperty_create.html";
         }
 
         return "index.html";
+    }
+
+    //list
+    @GetMapping("/listShift")
+    public String listShifts(ModelMap modelo) {
+        List<ShiftsByProperty> shiftsByProperties = shiftsByPropertyService.ListShiftsByProperty();
+        modelo.addAttribute("shiftsByProperties", shiftsByProperties);
+        return "shiftsByProperty_list.html";
+    }
+
+    @GetMapping("/modifyShift/{Id}")
+
+    public String modifyShift(@PathVariable Long Id, ModelMap modelo) {
+        modelo.put("ShiftsByProperty", shiftsByPropertyService.getOne(Id));
+        List<Property> properties = propertyService.listProperties();
+        modelo.addAttribute("properties", properties);
+        return "shiftsByProperty_modify.html";
+    }
+
+    @PostMapping("/modifyShift/{Id}")
+    public String modifyShift(@PathVariable Long Id, Long IdProperty, Date startTime, String userEmail, String shiftStatus, ModelMap modelo) {
+
+        try {
+
+            // Aquí estás intentando analizar la cadena startTime
+            //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            //Date parsedDate = dateFormat.parse(startTime.toString());
+            shiftsByPropertyService.modifyShiftsByProperty(Id, IdProperty, startTime, userEmail, shiftStatus);
+
+            return "redirect:../listShift";
+        } catch (MyException ex) {
+            List<Property> properties = propertyService.listProperties();
+            modelo.put("error", ex.getMessage());
+            modelo.addAttribute("properties", properties);
+            return "shiftsByProperty_modify.html";
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            modelo.put("error", "Error al analizar la fecha");
+            return "shiftsByProperty_modify.html";
+        }
+
     }
 
 }

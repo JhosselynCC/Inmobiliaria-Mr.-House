@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <!-- Head -->
@@ -28,28 +29,30 @@
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Id oferta</th>
+                            <th scope="col">Id turno</th>
                             <th scope="col">Id propiedad</th>
                             <th scope="col">email usuario</th>
                             <th scope="col">Fecha solicitud</th>
                             <th scope="col">Estado Oferta</th>
-                            <th scope="col">mensaje</th>
+                           
 
                             <th scope="col"  >Acciones</th>
 
                         </tr>
                     </thead>
-                    <tbody th:each="offersByProperty : ${offersByProperties}"> 
+                    <tbody th:each="shiftsByProperty : ${shiftsByProperties}"> 
                         <tr>
-                            <th scope="row" th:text="${offersByProperty.id}"></th>
-                            <td th:text="${offersByProperty.Property.id}"></td>
-                            <td th:text="${offersByProperty.userEmail}"></td>
-                            <td th:text="${offersByProperty.alta}"></td>
-                            <td th:text="${offersByProperty.statusOffer}"></td>
-                            <td th:text="${offersByProperty.message}"></td>
+                            <th scope="row" th:text="${shiftsByProperty.id}"></th>
+                            <td th:text="${shiftsByProperty.Property.id}"></td>
+                            <td th:text="${shiftsByProperty.userEmail}"></td>
+                            <td th:text="${shiftsByProperty.startTime}"></td>
+                            <td th:text="${shiftsByProperty.shiftStatus}"></td>
+                            
 
                             <td> 
-                                <a th:href="@{/property/modifyOffer/__${offersByProperty.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
+                               
+                               <a th:href= "@{/property/modifyShift/__${shiftsByProperty.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
+                              
                             </td>
 
                         </tr>
@@ -80,6 +83,7 @@
                     </div>
                 </section>
             </div>
+
         </main>
         <!-- Fin de Main -->
         <!-- Fin de Main -->
@@ -90,6 +94,6 @@
 
         <!-- Script de Boostrap.js -->
         <script th:replace="/fragments/script::script"></script>
-
     </body>
+
 </html>

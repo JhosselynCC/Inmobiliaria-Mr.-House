@@ -1,70 +1,87 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!-- Head -->
+    <head th:replace="/fragments/head::head">
+
+        <!-- Las siguientes lineas son solamente para que funcionen los estilos al trabajar con vsc -->
+        <!-- Boostrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <!-- Boostrap Icon -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+        <!-- CSS Personalizado -->
+        <link href="../../resources/static/css/styles.css" rel="stylesheet">
+
     </head>
-    <<body>
-        <header>
-            <div class="container">
-                <h2>carga la oferta  aqui </h2>
-            </div>
+
+    <body>
+
+        <!-- Header, Navbar -->
+        <header th:replace="/fragments/header::header">
+
         </header>
 
-        <div class="container">
-            <form th:action= "@{/property/offersRegistration/__${IdProperty}__}" method="POST">
-                <div class="form-group">                 
+        <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
+        <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
+        <main>
+            <h1>Enviar mensaje al Publicador</h1>
 
 
+            <div class="container">
 
+                <form th:action= "@{/property/offersRegistration/__${id}__}" method="POST">
+                    <div class="form-group">                 
 
-                    
-                   <!-- <input type="text" class="form-group" name="IdProperty" placeholder="Propiedad">-->
-                    <input type="text" name="IdProperty" th:value="${id}">
-                 
-                    <textarea class="form-group" name="message" rows="4" cols="50" >Hola estoy interesado por el inmueble por favor comunicate conmigo</textarea>
-                    
-                    
-
-
-         
-
-                </div>
-                <button type="submit" class="btn btn-primary"> Subir</button>
-            </form>
-
-            <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
-                <div class="card-body">
-                    <h5 class="card-title">Error 👎</h5>
-                    <p class="card-text" th:text="${error}"></p>
-                </div>
-            </div>
-
-            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
-                <div class="card-body">
-                    <h5 class="card-title">Exito!</h5>
-                    <p class="card-text" th:text="${exito}"></p>
-                </div>
-            </div>
-
-            <section class=" text-center container">
-                <div class="row mt-3">
-                    <div class="divVolver">
-                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                        <!-- <input type="text" class="form-group" name="IdProperty" placeholder="Propiedad">
+                        <input type="text" name="IdProperty" th:value="${id}">-->
+                        <input type="hidden" name="id" th:value="${id}">
                     </div>
-                </div>
-            </section>
 
 
+                    <div class="form-group">   
+                        <textarea class="form-group" name="message" rows="4" cols="50" >Hola estoy interesado por el inmueble por favor comunicate conmigo</textarea>
+
+
+                    </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary"> Enviar</button>
+        </form>
+
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+            <div class="card-body">
+                <h5 class="card-title">Error 👎</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
         </div>
 
+        <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+            <div class="card-body">
+                <h5 class="card-title">Exito!</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
 
-        <footer th:replace="/fragments/footer::footer"> </footer>
-    </body>
+        <section class=" text-center container">
+            <div class="row mt-3">
+                <div class="divVolver">
+                    <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </main>
+    <!-- Fin de Main -->
+    <!-- Fin de Main -->
+
+    <!-- Footer -->
+    <footer th:replace="/fragments/footer::footer"></footer>
+
+
+    <!-- Script de Boostrap.js -->
+    <script th:replace="/fragments/script::script"></script>
+</body>
 </html>

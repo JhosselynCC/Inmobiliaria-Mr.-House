@@ -1,88 +1,202 @@
-
-<nav class="navbar navbar-expand-xxl navbar-dark bg-dark fixed-top" aria-label="Ejemplo de séptima barra de navegación">
-
+<nav class="navbar">
     <div class="container-fluid">
-        <a href="//index.html" class="navbar-brand d-flex align-items-center">
-            <img src="/img/mrhouse.png" alt="Logo de Mr. House" width="150" height="70">
+        <!-- Logo alineado a la izquierda -->
+        <a class="navbar-brand" href="/">
+            <img src="img/logoProyectoFinal.png" alt="Logo" width="" height="55">
         </a>
-        <div class="d-flex justify-content-center text-center mx-auto">
-            <li><a class="navbar-brand" href="/">
-                    Home
-                </a></li>
-            <li><a class="navbar-brand" href="/comprar">
-                    Comprar
-                </a></li>
-            <li><a class="navbar-brand" href="/alquilar">
-                    Alquilar
-                </a></li>
 
-             <li class="nav-item dropdown">
-                        <a class="navbar-brand"  href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Publicar </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+        <div class="d-none d-lg-block" id="navbarCollapse">
+            <ul class="navbar-nav navbar1 mx-auto m-0 mb-0">
+                <li class="nav-item nav-item1">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item nav-item1">
+                    <a class="nav-link" href="/comprar">Comprar</a>
+                </li>
+                <li class="nav-item nav-item1">
+                    <a class="nav-link" href="/alquilar">Alquilar</a>
+                </li>
+                <li class="nav-item nav-item1">
+                    <a class="nav-link" th:href="@{/property/register}">Publicar</a>
+                </li>
+                <li class="nav-item nav-item1">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item nav-item1">
+                    <a class="nav-link" href="/contacto">Contacto</a>
+                </li>
+            </ul>
 
-                            <li><a class="dropdown-item" th:href="@{/property/register}">Crear Publicacion</a></li>
-                            <li><a class="dropdown-item" th:href="@{/property/list}">Listar Publicacion</a></li>
-                            <li><a class="dropdown-item"th:href="@{/publishers/register}">Registrarse como publicador</a></li>
-                            <li><a class="dropdown-item" th:href="@{/publishers/list}">Lista de Publicadores</a></li>
-                        </ul>
-                    </li>
-                    
-                    
         </div>
 
-        <a href="/Ingresar" class="mx-3 navbar-brand">Login</a>
+        <div>
+            <!-- Botón para abrir el modal de login -->
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Navegación de palanca">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <!-- <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                data-bs-target="#registroModal">
+                Login
+            </button> -->
 
-        <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
+            <!-- Botón para abrir el modal de registro -->
+            <!-- <button type="button" class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal"
+                data-bs-target="#registroModal">
+                Registrar
+            </button> -->
+            <a href="/login" th:if="${session.usuariosession == null}" class="btn btn-primary btn-sm mx-1">Ingresar</a>
+            <a href="/logout" th:if="${session.usuariosession != null}" class="btn btn-primary btn-sm mx-1">Cerrar Sesión</a>
+
+
+
+
+
+
+            <!-- Boton para mostrar el menu -->
+            <button class="btn btn-lg border-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="bi bi-list"></span>
+            </button>
+        </div>
+
+        <!-- Canvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
              aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body text-black">
-                <!-- Contenido del menú -->
-                <ul class="navbar-nav flex-grow-1 pe-3 ">
-                    <li class="nav-item">
-                        <a class="nav-link active text-black" aria-current="page" href="/home">
-                            Mr. House ®
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black" href="/blog">
-                            Blog
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled text-black" aria-disabled="true" href="/contacto">
-                            Contacto
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-black" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin
-                        </a>
-                        <ul class="dropdown-menu">
 
+            <div class="offcanvas-body p-5">
 
-                            <li><a class="dropdown-item text-black" href="#">
-                                    Users
-                                </a></li>
-                            <li><a class="dropdown-item text-black" href="#">
-                                    Profile
-                                </a></li>
-                            <li><a class="dropdown-item text-black" href="#">
-                                    List users
-                                </a></li>
-                        </ul>
+                <!-- Menu Navegacion Canvas -->
+                <ul class="navbar-nav justify-content-end flex-grow-1 pb-3 d-block d-lg-none">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/comprar">Comprar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alquilar">Alquilar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/property/register}">Publicar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contacto">Contacto</a>
                     </li>
                 </ul>
 
+
+                <!-- Menu Navegacion Mi Cuenta -->
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li> 
+
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;"> 
+                            <i class="bi bi-person-circle fs-5 me-2" ></i>Mi Cuenta</a>
+
+                        <ul class="dropdown-menu" >    
+                            <li><a class="dropdown-item" href="/profile" >Editar Perfil</a></li>
+                            <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
+                        </ul>
+
+                    </li>
+
+
+                    <li> 
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;">
+                            <i class="bi bi-file-earmark-text fs-5 me-2" ></i>Mis Gestiones</a>
+
+                        <ul class="dropdown-menu" >    
+                            <li><a class="dropdown-item" href="/profile" >Mis Ofertas</a></li>
+                            <li><a class="dropdown-item" href="/logout" >Mis Turnos</a></li>
+                        </ul>
+                    </li>
+
+                    <li> 
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;">
+                            <i class="bi bi-briefcase-fill fs-5 me-2" ></i>Mis Publicaciones</a>
+                        <ul class="dropdown-menu" >    
+                            <li><a class="dropdown-item" href="/profile" >Publicaciones</a></li>
+                            <li><a class="dropdown-item" href="/logout" >Ofertas por Publicaciones</a></li>
+                            <li><a class="dropdown-item" href="/logout" >Turnos por Publicaciones</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li > 
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;">
+                            <i class="bi bi-shield-fill-exclamation fs-5 me-2" ></i>Supervisor</a>
+                            
+   <!--                     <h6><i class="bi bi-shield-fill-exclamation fs-5 me-2" ></i>Supervisor</h6>
+
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            Usuarios
+                        </a>
+-->
+                        <ul class="dropdown-menu" >    
+                            <li><a class="dropdown-item" th:href="@{/listUsers}" >Lista usuarios</a></li>
+                            <li><a class="dropdown-item" href="/logout" >Lista de Roles</a></li>
+                           
+                            <li><a class="dropdown-item" th:href="@{/property/list}" >Lista Publicaciones</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/listOffer}" >Lista Ofertas</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/listShift}" >Lista de Turnos</a></li>
+                            <li><a class="dropdown-item" th:href="@{/contacto/lista}">Lista contactos</a></li>
+                            <li><a class="dropdown-item" href="" >Lista de Noticias</a></li>
+                            
+                        </ul>
+
+                    <!--    <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            Publicaciones
+                        </a>
+
+                        <ul class="dropdown-menu" >    
+                            <li><a class="dropdown-item" href="/profile" >Lista Publicaciones</a></li>
+                        </ul>
+
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            Contactos
+                        </a>
+
+                        <ul class="dropdown-menu" >    
+                            <li><a class="dropdown-item" href="/profile" >Lista contactos</a></li>
+                        </ul>
+
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            Blog de Noticias
+                        </a>
+
+                        <ul class="dropdown-menu" >    
+                            <li><a class="dropdown-item" href="/profile" >Lista de Noticias</a></li>
+                        </ul>
+-->
+                    </li>
+
+                    <!--
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Perfil22</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Configuracion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Listar Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Listar Publicaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Modificar Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cerrar Sesion</a>
+                    </li>
+                    -->
+                </ul>
             </div>
         </div>
-
+    </div>
 </nav>
-
