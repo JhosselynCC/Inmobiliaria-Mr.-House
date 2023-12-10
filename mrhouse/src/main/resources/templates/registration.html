@@ -6,111 +6,116 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <!-- Agregar Fragments 
+<!-- Agregar Fragments 
 
     <head th:replace="/fragments/head::head">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     -->
 
-    <head th:replace="/fragments/head::head">    </head>
+<head th:replace="/fragments/head::head"> </head>
 
 
 
 
-    <body > 
-        
+<body>
 
-        <!-- Header, Ver si se agrega algo class="" style="background-color: #f7f7f7;"-->
-        <header>
-            
-        </header>
-        <!-- Main -->
-        <main class="container">
 
-            <section class="row justify-content-center align-items-center text-center vh-100">
+    <!-- Header, Ver si se agrega algo class="" style="background-color: #f7f7f7;"-->
+    <header>
+        <header th:replace="/fragments/header::header"></header>
+    </header>
+    <!-- Main -->
+    <main class="container pt-5 pb-5">
 
-                <div class="col-md-5">
+        <section class="row justify-content-center align-items-center text-center vh-100">
 
-                    <!-- Mensajes Error / Exito -->
-                    <section class="row justify-content-center align-items-center mb-3">
+            <div class="col-md-5">
 
-                        <div class="col-md-12">
-                            <div th:if="${error != null}" class="col-md-12 card text-white bg-danger mensajeError">
-                                <div class="card-body">
-                                    <h6 class="card-title">Error</h6>
-                                    <p class="card-text" th:text="${error}"></p>
-                                </div>
-                            </div>
+                <!-- Mensajes Error / Exito -->
+                <section class="row justify-content-center align-items-center mb-3">
 
-                            <div th:if="${exito != null}" class="col-md-12 card text-white bg-success mensajeExito">
-                                <div class="card-body">
-                                    <h6 class="card-title">Exito</h6>
-                                    <p class="card-text" th:text="${exito}"></p>
-                                </div>
+                    <div class="col-md-12">
+                        <div th:if="${error != null}" class="col-md-12 card text-white bg-danger mensajeError">
+                            <div class="card-body">
+                                <h6 class="card-title">Error</h6>
+                                <p class="card-text" th:text="${error}"></p>
                             </div>
                         </div>
 
-                    </section>
-
-                    <form class="form-control p-5 shadow" th:action="@{/registration}" method="POST"
-                          enctype="multipart/form-data">
-
-                        <div class="mb-5">
-                            <h3>Registrarse</h3>
+                        <div th:if="${exito != null}" class="col-md-12 card text-white bg-success mensajeExito">
+                            <div class="card-body">
+                                <h6 class="card-title">Exito</h6>
+                                <p class="card-text" th:text="${exito}"></p>
+                            </div>
                         </div>
-
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="name" placeholder="Apellido y Nombre"
-                                   th:value="${name}">
-                        </div>
-
-                        <div class="mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Correo Electronico"
-                                   th:value="${email}">
-                        </div>
-
-                        <div class="mb-3">
-                            <input type="password" class="form-control" name="password" placeholder="Contraseña"
-                                   th:value="${password}">
-                        </div>
-
-                        <div class="mb-3">
-                            <input type="password" class="form-control" name="password2"
-                                   placeholder="Confirmar Contraseña" th:value="${password2}">
-                        </div>
-
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="dni" placeholder="DNI" th:value="${dni}" required>
-                        </div>
-
-                        <div class="">
-                            <select class="form-select mb-3" name="rol">
-                                <option th:each="rol : ${T(com.realestate.mrhouse.Relations.Rol).values()}"
-                                        th:value="${rol}" th:text="${rol}"></option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-dark m-3 botones">Registrarme</button>
-
-                    </form>
-
-
-                    <!-- Boton Volver -->
-                    <div class="text-center divVolver m-3">
-                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                     </div>
 
+                </section>
+
+                <form class="form-control p-5 shadow" th:action="@{/registration}" method="POST"
+                    enctype="multipart/form-data">
+
+                    <div class="mb-5">
+                        <h3>Registrarse</h3>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="Apellido y Nombre"
+                            th:value="${name}">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="email" class="form-control" name="email" placeholder="Correo Electronico"
+                            th:value="${email}">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña"
+                            th:value="${password}">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="password2" placeholder="Confirmar Contraseña"
+                            th:value="${password2}">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="dni" placeholder="DNI" th:value="${dni}" required>
+                    </div>
+
+                    <div class="">
+                        <select class="form-select mb-3" name="rol">
+                            <option th:each="rol : ${T(com.realestate.mrhouse.Relations.Rol).values()}"
+                                th:value="${rol}" th:text="${rol}"></option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark m-3 botones">Registrarme</button>
+
+                </form>
+
+
+                <!-- Boton Volver -->
+                <div class="text-center divVolver m-3">
+                    <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                 </div>
 
-            </section>
+            </div>
 
-        </main>
+        </section>
 
-        <!-- Footer, Agregar Fragments -->
-        
-        <footer th:replace=="/fragments/footer::footer"></footer>
+    </main>
 
-    </body>
+
+
+    <!-- Footer -->
+    <footer th:replace="/fragments/footer::footer"></footer>
+
+
+    <!-- Script de Boostrap.js -->
+    <script th:replace="/fragments/script::script"></script>
+
+</body>
 
 </html>

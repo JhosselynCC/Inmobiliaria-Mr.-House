@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Logo alineado a la izquierda -->
         <a class="navbar-brand" href="/">
-            <img src="img/logoProyectoFinal.png" alt="Logo" width="" height="55">
+            <img src="/img/logoProyectoFinal.png" alt="Logo" width="" height="55">
         </a>
 
         <div class="d-none d-lg-block" id="navbarCollapse">
@@ -43,7 +43,7 @@
                 Registrar
             </button> -->
             <a href="/login" th:if="${session.usuariosession == null}" class="btn btn-primary btn-sm mx-1">Ingresar</a>
-            <a href="/logout" th:if="${session.usuariosession != null}" class="btn btn-primary btn-sm mx-1">Cerrar Sesión</a>
+            <a href="/logout" th:if="${session.usuariosession != null}" class="btn btn-danger btn-sm mx-1">Cerrar Sesión</a>
 
 
 

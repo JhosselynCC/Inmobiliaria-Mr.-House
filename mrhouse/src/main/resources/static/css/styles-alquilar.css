@@ -1,11 +1,11 @@
 .page{
     
     height: auto;
-    width: 1490px;
+    /* width: 1490px; */
     display: inline-block;
     
     flex-wrap: wrap;
-    background-color: #F2F4F3;
+    /* background-color: #F2F4F3; */
    margin-left: 10px;
    margin-right: 10px;
     margin-bottom: 40px;
@@ -17,7 +17,7 @@
 .page .cards{
     display: flex;
     flex-wrap: wrap;
-    width: 1490px;
+    /* width: 1490px; */
     height: 1030px;
     height: auto;
     margin: 20px;

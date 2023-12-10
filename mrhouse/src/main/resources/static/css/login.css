@@ -4,35 +4,38 @@
 SELECTION STYLING
 *******************/
 
-::selection {
+/* Safari */
+/* ::selection {
 	color: #F2F4F3;
-	background: #22333B; /* Safari */
-}
-::-moz-selection {
+	background: #22333B;
+} */
+
+/* Firefox */
+/* ::-moz-selection {
 	color: #F2F4F3;
-	background: #22333B; /* Firefox */
-}
+	background: #22333B;
+} */
 
 /*******************
 BODY STYLING
 *******************/
 
-* {
+/* * {
 	margin: 0;
 	padding: 0;
 	border: none;
 	outline: none;
         font-family: 'Roboto', sans-serif;
-}
+} */
 
-body {
+/* body {
 
 	background-color: #22333B;
 	font-weight:300;
 	text-align: left;
 	text-decoration: none;
 	height: 500px;
-}
+} */
 
 #wrapper {
 	/* Center wrapper perfectly */

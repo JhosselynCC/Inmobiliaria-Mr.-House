@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeLeaf.org">
 
-<head th:replace="/fragments/head::head">
-    <meta charset="utf-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- <title>Real State Mr.House</title> -->
+<!-- Head -->
+<head>
+    <head th:replace="/fragments/head::head"></head>
+    <link rel="stylesheet" th:href=" @{/css/styles-alquilar.css}">
 
-    <!-- <link rel="icon" href="/img/Logo.webp" type="image/x-icon"> -->
-    <!-- <link href="css/one-page-wonder.min.css" rel="stylesheet"> -->
-
-    <script src="/scrip/scrip.js"></script> 
-    <!-- <link rel="stylesheet" th:href=" @{/css/styles-alquilar.css}"> -->
 </head>
 
 <body>
+    <!-- Header, Navbar -->
     <header th:replace="/fragments/header::header"></header>
 
 
@@ -49,7 +44,12 @@
     </div>
 
 
-    <footer th:replace="/fragments/footer :: footer"></footer>
+    <!-- Footer -->
+    <footer th:replace="/fragments/footer::footer"></footer>
+
+
+    <!-- Script de Boostrap.js -->
+    <script th:replace="/fragments/script::script"></script>
 
 </body>
 
