@@ -6,6 +6,8 @@
 package com.realestate.mrhouse.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.realestate.mrhouse.Enums.City;
+import com.realestate.mrhouse.Enums.Province;
 import com.realestate.mrhouse.Enums.StatusProperty;
 import com.realestate.mrhouse.Enums.TypeProperty;
 import com.realestate.mrhouse.Enums.TypePublication;
@@ -45,6 +47,12 @@ public class Property {
 
     @Enumerated(EnumType.STRING)
     private TypeProperty typeProperty;
+    
+    @Enumerated(EnumType.STRING)
+    private Province province;
+    
+    @Enumerated(EnumType.STRING)
+    private City city;
 
     private String features;
     private Double price;
@@ -58,9 +66,6 @@ public class Property {
     private Image image;
      */
     private String location;
-    private String province;
-    private String city;
-
     @ManyToOne
     private Publishers publishers;
 
@@ -148,21 +153,22 @@ public class Property {
         this.location = location;
     }
 
-    public String getProvince() {
+    public Province getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(Province province) {
         this.province = province;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
+
 
     public Publishers getPublishers() {
         return publishers;

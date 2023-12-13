@@ -116,7 +116,8 @@ and open the template in the editor.
                         <div class="col-md-6 mb-3">
                             <label for="inputState" class="form-label">Provincia</label>
                             <select name="province" id="inputState" class="form-select">
-                                <option selected>Cordoba</option>
+                                <option th:each="Province : ${T(com.realestate.mrhouse.Enums.Province).values()}"
+                                th:value="${Province}" th:text="${Province.getNombre()}"></option>
                             </select>
 
                         </div>
@@ -124,7 +125,8 @@ and open the template in the editor.
                         <div class="col-md-6 mb-3">
                             <label for="inputState" class="form-label">Ciudad</label>
                             <select name="city" id="inputState" class="form-select">
-                                <option selected>Cordoba</option>
+                                <option th:each="City : ${T(com.realestate.mrhouse.Enums.City).values()}"
+                                th:value="${City}" th:text="${City.getNombre()}"></option>
                             </select>
 
                         </div>

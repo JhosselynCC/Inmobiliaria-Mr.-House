@@ -8,6 +8,8 @@ package com.realestate.mrhouse.Services;
 import com.realestate.mrhouse.Entities.Image;
 import com.realestate.mrhouse.Entities.Property;
 import com.realestate.mrhouse.Entities.Publishers;
+import com.realestate.mrhouse.Enums.City;
+import com.realestate.mrhouse.Enums.Province;
 import com.realestate.mrhouse.Enums.StatusProperty;
 import com.realestate.mrhouse.Enums.TypeProperty;
 import com.realestate.mrhouse.Enums.TypePublication;
@@ -71,6 +73,8 @@ public class PropertyService {
 
         property.setTitle(title);
         property.setTypeProperty(TypeProperty.valueOf(typeProperty));
+        property.setProvince(Province.valueOf(province));
+        property.setCity(City.valueOf(city));
         property.setFeatures(features);
         property.setPrice(price);
         /*
@@ -80,8 +84,6 @@ public class PropertyService {
             imageService.save(image, property);
         }
         property.setLocation(location);
-        property.setProvince(province);
-        property.setCity(city);
         property.setAlta(new Date());
         property.setPublishers(p);
         property.setStatusProperty(StatusProperty.DISPONIBLE);
@@ -309,11 +311,11 @@ public class PropertyService {
         if (location.isEmpty() || location == null) {
             throw new MyException("La ubicacion no puede ser nula o estar vacia");
         }
-        if (province.isEmpty() || province == null) {
-            throw new MyException("La provincia no puede ser nula o estar vacia");
+        if (province == null) {
+            throw new MyException("La provincia no puede ser nula");
         }
-        if (city.isEmpty() || city == null) {
-            throw new MyException("La ciudad no puede ser nula o estar vaciao");
+        if (city == null) {
+            throw new MyException("La ciudad no puede ser nula");
         }
         if (idPublisher == null) {
             throw new MyException("El Id del Publisher no puede ser nulo o estar vacio");
