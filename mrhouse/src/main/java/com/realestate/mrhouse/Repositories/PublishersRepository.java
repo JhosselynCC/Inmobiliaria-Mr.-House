@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
  * @author 2171584201008
  */
 @Repository
-public interface PublishersRepository extends JpaRepository<Publishers, String>{
+public interface PublishersRepository extends JpaRepository<Publishers, Long>{
+    
+    
     
 }

@@ -8,6 +8,7 @@ package com.realestate.mrhouse.Services;
 import com.realestate.mrhouse.Entities.Image;
 import com.realestate.mrhouse.Entities.Property;
 import com.realestate.mrhouse.Entities.Publishers;
+import com.realestate.mrhouse.Enums.StatusProperty;
 import com.realestate.mrhouse.Enums.TypeProperty;
 import com.realestate.mrhouse.Enums.TypePublication;
 
@@ -54,11 +55,12 @@ public class PropertyService {
     
     
     @Transactional
-    public void createProperty(List<MultipartFile> images, String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, String idPublisher) throws MyException {
+    public void createProperty(List<MultipartFile> images, String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, Long idPublisher) throws MyException {
 
         validar(typePublication, title, typeProperty, features, price, images, location, province, city, idPublisher);
 
         Publishers p = publisherRepository.findById(idPublisher).get();
+                
         /*   autor a = autorRepositorio.findById(IdAutor).get();
                 .orElseThrow(() -> new MyException("Publisher no encontrado con ID: " + idPublisher));
          */
@@ -82,10 +84,16 @@ public class PropertyService {
         property.setCity(city);
         property.setAlta(new Date());
         property.setPublishers(p);
+        property.setStatusProperty(StatusProperty.DISPONIBLE);
+        property.setActive(true);
 
         propertyRepository.save(property);
     }
 
+    
+    /*
+    
+    */
     public List<Property> listProperties() {
 
         /* public List<Property> listProperties() {
@@ -278,7 +286,7 @@ public class PropertyService {
         return propertyRepository.getOne(id);
     }
 
-    private void validar(String typePublication, String title, String typeProperty, String features, Double price, List<MultipartFile> images, String location, String province, String city, String idPublisher) throws MyException {
+    private void validar(String typePublication, String title, String typeProperty, String features, Double price, List<MultipartFile> images, String location, String province, String city, Long idPublisher) throws MyException {
         if (typePublication == null) {
             throw new MyException("El tipo de publicacion no puede ser nulo");
         }
@@ -307,7 +315,7 @@ public class PropertyService {
         if (city.isEmpty() || city == null) {
             throw new MyException("La ciudad no puede ser nula o estar vaciao");
         }
-        if (idPublisher == null || idPublisher.isEmpty()) {
+        if (idPublisher == null) {
             throw new MyException("El Id del Publisher no puede ser nulo o estar vacio");
         }
 

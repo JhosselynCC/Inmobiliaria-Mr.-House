@@ -6,9 +6,9 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
+    <head>
 
-    <title>Crear Publicacion | Mr.House</title>
+        <title>Crear Publicacion | Mr.House</title>
     <head th:replace="/fragments/head::head"></head>
 
 </head>
@@ -25,27 +25,35 @@ and open the template in the editor.
             <div class="col-md-7 p-5 order-sm-2 order-md-1">
                 <div>
                     <form class="row g-3" th:action="@{/property/registration}" method="POST"
-                        enctype="multipart/form-data">
+                          enctype="multipart/form-data">
 
                         <div class="form-group my-3">
-                            <select name="idPublisher" class="form-select">
-                                <option>Seleccionar publicador</option>
-                                <option th:each="Publishers : ${publishers}" th:value="${Publishers.id}"
-                                    th:text="${Publishers.name}" />
-                            </select>
+
+                            <input type="text" name="idPublisher" class="form-control" placeholder="Ingresar DNI del publicador" />
+                            <!-- <select name="idPublisher" class="form-select">
+                                 <option>Seleccionar publicador</option>
+                                 <option th:each="Publishers : ${publishers}" th:value="${Publishers.dni}"
+                                         th:text="${Publishers.dni}" />
+                             </select>-->
+
                         </div>
                         <div class="col-md-6 mb-3">
                             <!-- <label for="formGroupExampleInput" class="form-label">Tipo Publicacion</label>
                                  <input type="text" class="form-control" id="formGroupExampleInput"
                                         placeholder="Casa con cochera sobre avenida" required>
                                  typePublication, title, features, price, images, location, province, city, idPublisher
-                                -->
+                            
                             <select name="typePublication" id="typeOwner" class="form-select" required>
                                 <option hidden selected>Tipo Publicacion</option>
                                 <option value="VENTA">Venta</option>
                                 <option value="ALQUILER">Alquiler</option>
                                 <option value="TEMPORADA">Temporada</option>
 
+                            </select> -->
+
+                            <select class="form-select mb-3" name="typePublication" required>
+                                <option th:each="typePublication : ${T(com.realestate.mrhouse.Enums.TypePublication).values()}"
+                                        th:value="${typePublication}" th:text="${typePublication}"></option>
                             </select>
 
                         </div>
@@ -57,7 +65,7 @@ and open the template in the editor.
                                      <option selected>Casa</option>
                                      <option value="1">Departamento</option>
                                  </select>
-                                -->
+                           
                             <select name="typeProperty" id="typeOwner" class="form-select" required>
                                 <option hidden selected>Tipo Propiedad</option>
                                 <option value="CASA">Casa</option>
@@ -67,13 +75,18 @@ and open the template in the editor.
                                 <option value="DEPOSITO">Deposito</option>
                                 <option value="COCHERAS">Cocheras</option>
 
+                            </select>-->
+
+                            <select class="form-select mb-3" name="typeProperty" required>
+                                <option th:each="typeProperty: ${T(com.realestate.mrhouse.Enums.TypeProperty).values()}"
+                                        th:value="${typeProperty}" th:text="${typeProperty}"></option>
                             </select>
                         </div>
 
                         <div class="col-md-8 mb-3">
                             <label for="formGroupExampleInput" class="form-label">Titulo</label>
                             <input type="text" class="form-control" id="formGroupExampleInput" name="title"
-                                placeholder="Casa con cochera sobre avenida" required>
+                                   placeholder="Casa con cochera sobre avenida" required>
                         </div>
 
 
@@ -83,13 +96,13 @@ and open the template in the editor.
                                 <input type="text" class="form-control" id="formGroupExampleInput"
                                        placeholder="Casa con cochera sobre avenida" required>
                             </div>
-                            -->
+                        -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Precio</label>
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
                                 <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                    name="price">
+                                       name="price">
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -97,7 +110,7 @@ and open the template in the editor.
                         <div class="col-md-12 mb-3">
                             <label for="inputAddress" class="form-label">Direccion</label>
                             <input type="text" class="form-control" id="inputAddress" name="location"
-                                placeholder="Avenida Siempre Viva 123" required>
+                                   placeholder="Avenida Siempre Viva 123" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -122,14 +135,14 @@ and open the template in the editor.
                             <label class="form-label">Imagen del Inmueble</label>
                             <!-- <input type="file" class="form-control" aria-label="file example" name="images" >-->
                             <input type="file" multiple name="images" class="form-control" id="files" accept="images/*"
-                                required>
+                                   required>
                             <div class="invalid-feedback">Example invalid form file feedback</div>
                         </div>
 
                         <div class="col-12 mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Descripción del Inmueble</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="features"
-                                rows="3"></textarea>
+                                      rows="3"></textarea>
                         </div>
 
 
@@ -144,7 +157,7 @@ and open the template in the editor.
 
             <!-- Columna Descripcion -->
             <div class="col-md-5 p-5 bg-venta text-white order-sm-1 order-md-2"
-                style="border-radius: 0rem 0.25rem 0.25rem 0rem;">
+                 style="border-radius: 0rem 0.25rem 0.25rem 0rem;">
                 <h2 class="mb-4">¡Venta de propiedades!</h2>
                 <h6 class="mb-5 text-">Queremos que esta experiencia sea lo más sencilla posible para ti.</h6>
 
@@ -160,6 +173,33 @@ and open the template in the editor.
             </div>
 
         </section>
+        
+        
+        
+        
+
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+            <div class="card-body">
+                <h5 class="card-title">Error 👎</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+
+        <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+            <div class="card-body">
+                <h5 class="card-title">Exito!</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+
+        <section class=" text-center container">
+            <div class="row mt-3">
+                <div class="divVolver">
+                    <a th:href="@{/publishers/register}" class="btn btn-secondary my-2 botonVolver botones">Registrarse como publicador</a>
+                </div>
+            </div>
+        </section>
+
     </main>
     <!-- Footer -->
     <footer th:replace="/fragments/footer::footer"></footer>

@@ -23,10 +23,13 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Publishers {
 
-    @Id
+   /* @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String Id;
+    private String Id;*/
+
+    @Id
+    private Long dni;
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -35,13 +38,15 @@ public class Publishers {
     public Publishers() {
     }
 
-    public String getId() {
-        return Id;
+    public Long getDni() {
+        return dni;
     }
 
-    public void setId(String Id) {
-        this.Id = Id;
+    public void setDni(Long dni) {
+        this.dni = dni;
     }
+
+
 
     public String getName() {
         return name;

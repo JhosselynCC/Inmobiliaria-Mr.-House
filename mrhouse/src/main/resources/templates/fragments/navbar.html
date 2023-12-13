@@ -110,7 +110,7 @@
                             <i class="bi bi-file-earmark-text fs-5 me-2" ></i>Mis Gestiones</a>
 
                         <ul class="dropdown-menu" >    
-                            <li><a class="dropdown-item" href="/profile" >Mis Ofertas</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/myOffers}" >Mis Ofertas</a></li>
                             <li><a class="dropdown-item" href="/logout" >Mis Turnos</a></li>
                         </ul>
                     </li>
@@ -141,6 +141,7 @@
                             <li><a class="dropdown-item" href="/logout" >Lista de Roles</a></li>
                            
                             <li><a class="dropdown-item" th:href="@{/property/list}" >Lista Publicaciones</a></li>
+                            <li><a class="dropdown-item" th:href="@{/publishers/list}" >Lista de publicadores</a></li>
                             <li><a class="dropdown-item" th:href="@{/property/listOffer}" >Lista Ofertas</a></li>
                             <li><a class="dropdown-item" th:href="@{/property/listShift}" >Lista de Turnos</a></li>
                             <li><a class="dropdown-item" th:href="@{/contacto/lista}">Lista contactos</a></li>

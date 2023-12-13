@@ -11,10 +11,12 @@ import com.realestate.mrhouse.Entities.Property;
 import com.realestate.mrhouse.Entities.Publishers;
 import com.realestate.mrhouse.Entities.ShiftsByProperty;
 import com.realestate.mrhouse.Exceptions.MyException;
+import com.realestate.mrhouse.Repositories.OffersByPropertyRepository;
 import com.realestate.mrhouse.Services.OffersByPropertyService;
 import com.realestate.mrhouse.Services.PropertyService;
 import com.realestate.mrhouse.Services.PublishersService;
 import com.realestate.mrhouse.Services.ShiftsByPropertyService;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +26,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +55,9 @@ public class PropertyController {
     @Autowired
     private ShiftsByPropertyService shiftsByPropertyService;
 
+    @Autowired
+    private OffersByPropertyRepository offersByPropertyRepository;
+
     @GetMapping("/register")
     public String register(ModelMap modelo) {
 
@@ -69,8 +75,22 @@ public class PropertyController {
             ModelMap modelo, List<MultipartFile> images) {
 
         try {
-            propertyService.createProperty(images, typePublication, title, typeProperty, features, price, location, province, city, idPublisher);
+
+            // Validar que el DNI ingresado existe en la lista de publishers
+            Long dniPublisher = Long.parseLong(idPublisher);
+            boolean publisherExists = publishersService.publisherExists(dniPublisher);
+            if (!publisherExists) {
+                // El DNI ingresado no existe en la lista de publishers
+                throw new MyException("El DNI ingresado no coincide con ningún publicador existente");
+            }
+
+            propertyService.createProperty(images, typePublication, title, typeProperty, features, price, location, province, city, dniPublisher);
             modelo.put("exito", "la propiedad  fue cargado correctamente");
+
+        } catch (NumberFormatException ex) {
+            // Captura la excepción si el DNI ingresado no es un número válido
+            modelo.put("error", "Ingrese un número válido como DNI");
+            Logger.getLogger(PropertyController.class.getName()).log(Level.SEVERE, null, ex);
 
         } catch (MyException ex) {
             List<Publishers> publishers = publishersService.listPublishers();
@@ -79,8 +99,6 @@ public class PropertyController {
 
             modelo.put("error", ex.getMessage());
             Logger.getLogger(PublishersController.class.getName()).log(Level.SEVERE, null, ex);
-
-            System.out.println();
 
             return "property_create.html";
         }
@@ -152,6 +170,7 @@ public class PropertyController {
         return "offersByProperty_list.html";
     }
 
+    //modify
     @GetMapping("/modifyOffer/{Id}")
 
     public String modifyOffer(@PathVariable Long Id, ModelMap modelo) {
@@ -174,6 +193,28 @@ public class PropertyController {
 
         }
 
+    }
+
+    //list ofertas por  usuario
+    @GetMapping("/myOffers")
+    public String OffersByUser(Model model, Principal principal) {
+        try {
+            // Obtener el correo electrónico del usuario logueado
+            String userEmail = principal.getName();
+
+            // Buscar ofertas por el correo electrónico del usuario
+            List<OffersByProperty> offersByProperties = offersByPropertyRepository.findByUserEmail(userEmail);
+
+            // Agregar las ofertas al modelo
+            model.addAttribute("offersByProperties", offersByProperties);
+
+            return "my_offers.html";
+            
+        } catch (Exception e) {
+            // Manejar excepciones, por ejemplo, registrar el error y redirigir a una página de error
+            model.addAttribute("error", "Error al recuperar las ofertas del usuario");
+            return "error";
+        }
     }
 
     /**

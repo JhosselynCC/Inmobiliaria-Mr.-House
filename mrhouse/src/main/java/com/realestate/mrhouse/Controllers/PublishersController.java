@@ -36,10 +36,10 @@ public class PublishersController {
     }
 
     @PostMapping("/registration")
-    public String registration(@RequestParam String name, @RequestParam String typeOwner, ModelMap modelo) {
+    public String registration(@RequestParam Long dni,@RequestParam String name, @RequestParam String typeOwner, ModelMap modelo) {
 
         try {
-            publishersService.createPublishersService(name, typeOwner);
+            publishersService.createPublishersService(dni, name, typeOwner);
             modelo.put("exito", "el publicador  fue cargado correctamente");
 
         } catch (MyException ex) {
