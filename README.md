@@ -9,3 +9,4 @@ Se agrega ultimos cambios de la presentacion de W1-
 30.11/2023 Se commitea modificaciones de Propiedades
 5/12/2023 Se comitea modificaciones en comprar alquilar security funcionando
 11/12/2023 Se comitea los fragments en todos los html
+12/11/2023 se commitea modificacion  dni publicador
