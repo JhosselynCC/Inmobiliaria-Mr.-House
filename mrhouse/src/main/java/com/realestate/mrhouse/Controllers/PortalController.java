@@ -94,7 +94,7 @@ public class PortalController {
         return "home.html";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @GetMapping("/profile")
     public String profile(ModelMap modelo, HttpSession session) {
         Users user = (Users) session.getAttribute("usuariosession");
@@ -104,7 +104,7 @@ public class PortalController {
 
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @PostMapping("/profile/{id}")
     public String update(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
             @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
@@ -123,14 +123,14 @@ public class PortalController {
     }
 
     //list
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/listUsers")
     public String listUsers(ModelMap modelo) {
         List<Users> users = userService.listUsers();
         modelo.addAttribute("users", users);
         return "user_list.html";
     }
-    
-    
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/users/modify/{id}")
     public String userModify(ModelMap modelo, @PathVariable Long id) {
@@ -147,7 +147,7 @@ public class PortalController {
             @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
 
         try {
-            
+
             userService.actualizar(id, name, email, password, password2, dni, rol);
             modelo.put("exito", "usuario fue actualizado correctamente");
             return ("/panel.html");
@@ -159,6 +159,5 @@ public class PortalController {
         }
 
     }
-     
 
 }

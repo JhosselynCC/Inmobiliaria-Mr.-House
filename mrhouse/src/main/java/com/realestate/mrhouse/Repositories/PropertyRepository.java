@@ -24,6 +24,13 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("SELECT p.id, i.contenido FROM Property p INNER JOIN Image i ON p.id = i.property.id WHERE p.id = :id")
     public Property searchImageByProperty(@Param("id") Long id);
+    
+    
+    // Consulta para obtener todas las propiedades de un publicador por su DNI
+    @Query("SELECT p FROM Property p WHERE p.publishers.dni = :dni")
+    List<Property> findPropertiesByPublisherDni(@Param("dni") Long dni);
+    
+
 
 }
 

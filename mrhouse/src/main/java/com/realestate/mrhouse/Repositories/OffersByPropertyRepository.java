@@ -18,12 +18,20 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OffersByPropertyRepository extends JpaRepository<OffersByProperty, Long> {
-
+//Consulta para obtener lista de todas ofertas realizadas con el usuario logueado
     @Query("SELECT u FROM OffersByProperty u where u.userEmail= :email")
     List<OffersByProperty> findByUserEmail(@Param("email") String email);
 //@Query("SELECT a.id AS oferta, b.id AS inmueble, b.typeProperty AS type_property, " +
   //     "b.typePublication AS type_publication, b.price, a.statusOffer AS status_offer " +
   //     "FROM OffersByProperty a INNER JOIN a.property b WHERE a.userEmail = :email")
 //List<Object[]> findByUserEmail(@Param("email") String email);
+    
+    // Consulta para obtener todas las ofertas por las propiedades de un publicador por su DNI
+    //@Query("SELECT o FROM OffersByProperty o WHERE o.property.publishers.dni = :dni")
+   // List<OffersByProperty> findByPublisherDni(@Param("dni") Long dni);
+    
+     // Consulta para obtener todas las ofertas por las propiedades de un publicador por su DNI
+    @Query("SELECT o FROM OffersByProperty o WHERE o.property.publishers.dni = :dniPublisher")
+    List<OffersByProperty> findByPublisherDni(@Param("dniPublisher") Long dniPublisher);
 
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!-- Head -->
+    <head th:replace="/fragments/head::head">
+
+        <!-- Las siguientes lineas son solamente para que funcionen los estilos al trabajar con vsc -->
+        <!-- Boostrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <!-- Boostrap Icon -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+        <!-- CSS Personalizado -->
+        <link href="../../resources/static/css/styles.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <!-- Header, Navbar -->
+        <header th:replace="/fragments/header::header"></header>
+
+        <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
+        <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
+        <main>
+
+            <div class="container m-5" >
+
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id turno</th>
+                            <th scope="col">Id propiedad</th>
+                            <th scope="col">email usuario</th>
+                            <th scope="col">Fecha solicitud</th>
+                            <th scope="col">Estado Oferta</th>
+                           
+
+                            <th scope="col"  >Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody th:each="shiftsByProperty : ${shiftsByProperties}"> 
+                        <tr>
+                            <th scope="row" th:text="${shiftsByProperty.id}"></th>
+                            <td th:text="${shiftsByProperty.Property.id}"></td>
+                            <td th:text="${shiftsByProperty.userEmail}"></td>
+                            <td th:text="${shiftsByProperty.startTime}"></td>
+                            <td th:text="${shiftsByProperty.shiftStatus}"></td>
+                            
+
+                            <td> 
+                               
+                               <a th:href= "@{/property/modifyShift/__${shiftsByProperty.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
+                              
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+                <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                    <div class="card-body">
+                        <h5 class="card-title">Exito ð</h5>
+                        <p class="card-text" th:text="${exito}"></p>
+                    </div>
+                </div>
+                <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+                    <div class="card-body">
+                        <h5 class="card-title">Error ð</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+
+                <section class="py-5 text-center container">
+                    <div class="row py-lg-5">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                            <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+        <!-- Fin de Main -->
+        <!-- Fin de Main -->
+
+        <!-- Footer -->
+        <footer th:replace="/fragments/footer::footer"></footer>
+
+
+        <!-- Script de Boostrap.js -->
+        <script th:replace="/fragments/script::script"></script>
+    </body>
+
+</html>

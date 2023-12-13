@@ -17,7 +17,7 @@
                     <a class="nav-link" href="/alquilar">Alquilar</a>
                 </li>
                 <li class="nav-item nav-item1">
-                    <a class="nav-link" th:href="@{/property/register}">Publicar</a>
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN') or hasRole('ENTE')" th:href="@{/property/register}">Publicar</a>
                 </li>
                 <li class="nav-item nav-item1">
                     <a class="nav-link" href="/blog">Blog</a>
@@ -79,7 +79,7 @@
                         <a class="nav-link" href="/alquilar">Alquilar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/property/register}">Publicar</a>
+                        <a class="nav-link" sec:authorize="hasRole('ADMIN') or hasRole('ENTE')" th:href="@{/property/register}">Publicar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/blog">Blog</a>
@@ -111,23 +111,23 @@
 
                         <ul class="dropdown-menu" >    
                             <li><a class="dropdown-item" th:href="@{/property/myOffers}" >Mis Ofertas</a></li>
-                            <li><a class="dropdown-item" href="/logout" >Mis Turnos</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/myShifts}" >Mis Turnos</a></li>
                         </ul>
                     </li>
 
                     <li> 
-                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;">
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" sec:authorize="hasRole('ADMIN') or hasRole('ENTE')" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;">
                             <i class="bi bi-briefcase-fill fs-5 me-2" ></i>Mis Publicaciones</a>
                         <ul class="dropdown-menu" >    
-                            <li><a class="dropdown-item" href="/profile" >Publicaciones</a></li>
-                            <li><a class="dropdown-item" href="/logout" >Ofertas por Publicaciones</a></li>
-                            <li><a class="dropdown-item" href="/logout" >Turnos por Publicaciones</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/propertyByPublisher}">Publicaciones</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/offersByPropertyPublisher}">Ofertas por Publicaciones</a></li>
+                            <li><a class="dropdown-item" th:href="@{/property/shiftsByPropertyPublisher}" >Turnos por Publicaciones</a></li>
                         </ul>
 
                     </li>
 
                     <li > 
-                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;">
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-weight: bold;">
                             <i class="bi bi-shield-fill-exclamation fs-5 me-2" ></i>Supervisor</a>
                             
    <!--                     <h6><i class="bi bi-shield-fill-exclamation fs-5 me-2" ></i>Supervisor</h6>

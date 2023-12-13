@@ -10,8 +10,12 @@ import com.realestate.mrhouse.Entities.OffersByProperty;
 import com.realestate.mrhouse.Entities.Property;
 import com.realestate.mrhouse.Entities.Publishers;
 import com.realestate.mrhouse.Entities.ShiftsByProperty;
+import com.realestate.mrhouse.Entities.Users;
 import com.realestate.mrhouse.Exceptions.MyException;
 import com.realestate.mrhouse.Repositories.OffersByPropertyRepository;
+import com.realestate.mrhouse.Repositories.PropertyRepository;
+import com.realestate.mrhouse.Repositories.ShiftsByPropertyRepository;
+import com.realestate.mrhouse.Repositories.UserRepository;
 import com.realestate.mrhouse.Services.OffersByPropertyService;
 import com.realestate.mrhouse.Services.PropertyService;
 import com.realestate.mrhouse.Services.PublishersService;
@@ -23,8 +27,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.hibernate.annotations.common.util.impl.LoggerFactory.logger;
+import static org.hibernate.internal.CoreLogging.logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -58,6 +65,17 @@ public class PropertyController {
     @Autowired
     private OffersByPropertyRepository offersByPropertyRepository;
 
+    @Autowired
+    private ShiftsByPropertyRepository shiftsByPropertyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PropertyRepository propertyRepository;
+
+    //CREAR PUBLICACIONES
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ENTE')")
     @GetMapping("/register")
     public String register(ModelMap modelo) {
 
@@ -106,6 +124,8 @@ public class PropertyController {
         return "index.html";
     }
 
+    //LISTAR TODAS LAS PUBLICACIONES 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/list")
     public String list(ModelMap modelo) {
         List<Property> properties = propertyService.listProperties();
@@ -127,6 +147,23 @@ public class PropertyController {
         List<Image> imagesProperty = propertyService.obtainImageByProperty(propertyId);
         modelo.addAttribute("imagesProperty", imagesProperty);
         return "detail_property.html";
+
+    }
+
+    //LISTAR PUBLICACIONES POR PUBLICADOR LOGUEADO
+    @GetMapping("/propertyByPublisher")
+    public String listPropertyByPublisher(Model model, Principal principal) {
+        // Obtener el nombre de usuario del usuario logueado
+        String username = principal.getName();
+        // Obtener la entidad Users usando el nombre de usuario
+        Users user = userRepository.searchByEmail(username);
+        // Obtener el DNI del usuario
+        Long dniPublisher = user.getDni();
+        // Obtener las propiedades del publicador
+        List<Property> properties = propertyRepository.findPropertiesByPublisherDni(dniPublisher);
+        // Agregar las propiedades al modelo para mostrar en la vista
+        model.addAttribute("properties", properties);
+        return "propertyByPublisher_list.html";
     }
 
     /**
@@ -163,6 +200,7 @@ public class PropertyController {
     }
 
     //list
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/listOffer")
     public String listOffer(ModelMap modelo) {
         List<OffersByProperty> offersByProperties = offersByProperyService.ListOffersByProperty();
@@ -195,7 +233,7 @@ public class PropertyController {
 
     }
 
-    //list ofertas por  usuario
+    //LISTAR OFERTAS HECHAS POR EL USUARIO LOGUEADO
     @GetMapping("/myOffers")
     public String OffersByUser(Model model, Principal principal) {
         try {
@@ -209,7 +247,7 @@ public class PropertyController {
             model.addAttribute("offersByProperties", offersByProperties);
 
             return "my_offers.html";
-            
+
         } catch (Exception e) {
             // Manejar excepciones, por ejemplo, registrar el error y redirigir a una página de error
             model.addAttribute("error", "Error al recuperar las ofertas del usuario");
@@ -217,8 +255,27 @@ public class PropertyController {
         }
     }
 
+    //LISTAR OFERTAS RECIBIDAS POR PUBLICACIONES HECHAS POR PUBLICADOR LOGUEADO
+    @GetMapping("/offersByPropertyPublisher")
+    public String listOffersByProperty(Model model, Principal principal) {
+        // Obtener el nombre de usuario del usuario logueado
+        String username = principal.getName();
+        // Obtener la entidad Users usando el nombre de usuario
+        Users user = userRepository.searchByEmail(username);
+        // Obtener el DNI del usuario
+        Long dniPublisher = user.getDni();
+        // Obtener las propiedades del publicador
+        List<OffersByProperty> offersByProperties = offersByPropertyRepository.findByPublisherDni(dniPublisher);
+        // Agregar las propiedades al modelo para mostrar en la vista
+        model.addAttribute("offersByProperties", offersByProperties);
+
+        return "offersByPropertyPublisher_list";
+    }
+
     /**
+     * *
      * Controlamos los turnos por propiedad
+     *
      */
     //create
     @GetMapping("/shifts/{id}")
@@ -253,7 +310,8 @@ public class PropertyController {
         return "index.html";
     }
 
-    //list
+    //LISTA TODOS LOS TURNOS
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/listShift")
     public String listShifts(ModelMap modelo) {
         List<ShiftsByProperty> shiftsByProperties = shiftsByPropertyService.ListShiftsByProperty();
@@ -293,6 +351,45 @@ public class PropertyController {
             return "shiftsByProperty_modify.html";
         }
 
+    }
+
+    //LISTAR TURNOS ENVIADOS POR EL USUARIO
+    @GetMapping("/myShifts")
+    public String ShiftsByUser(Model model, Principal principal) {
+        try {
+            // Obtener el correo electrónico del usuario logueado
+            String userEmail = principal.getName();
+
+            // Buscar ofertas por el correo electrónico del usuario
+            List<ShiftsByProperty> shiftsByProperties = shiftsByPropertyRepository.findByUserEmail(userEmail);
+
+            // Agregar las ofertas al modelo
+            model.addAttribute("shiftsByProperties", shiftsByProperties);
+
+            return "my_shifts.html";
+
+        } catch (Exception e) {
+            // Manejar excepciones, por ejemplo, registrar el error y redirigir a una página de error
+            model.addAttribute("error", "Error al recuperar los turnos del usuario");
+            return "error";
+        }
+    }
+
+    //LISTAR TURNOS RECIBIDOS POR PUBLICACIONES HECHAS POR PUBLICADOR LOGUEADO
+    @GetMapping("/shiftsByPropertyPublisher")
+    public String listShiftsByProperty(Model model, Principal principal) {
+        // Obtener el nombre de usuario del usuario logueado
+        String username = principal.getName();
+        // Obtener la entidad Users usando el nombre de usuario
+        Users user = userRepository.searchByEmail(username);
+        // Obtener el DNI del usuario
+        Long dniPublisher = user.getDni();
+        // Obtener las propiedades del publicador
+        List<ShiftsByProperty> shiftsByProperties = shiftsByPropertyRepository.findByPublisherDni(dniPublisher);
+        // Agregar las propiedades al modelo para mostrar en la vista
+        model.addAttribute("shiftsByProperties", shiftsByProperties);
+
+        return "shiftsByPropertyPublisher_list.html";
     }
 
 }
