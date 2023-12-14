@@ -23,7 +23,7 @@
 
     <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
     <!-- Colocar todo el contenido de cada pagina debajo de este comentario dentro de main -->
-    <main class="container-fluid bg-light pt-5 pb-5">
+    <main class="container-xxl bg-light pt-3 pb-5">
 
         <section class="row justify-content-center">
 
@@ -34,10 +34,20 @@
 
             <div class="col-6">
 
+                <section>
+                    <div class="alert alert-success" th:if="${exito !=null}" role="alert">
+                        <i class="bi bi-check-circle-fill"></i><span class="px-2" th:text="${exito}">Prueba</span>
+                      </div>
+        
+                      <div class="alert alert-danger" th:if="${error !=null}" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i><span class="px-2" th:text="${error}">Prueba</span>
+                      </div>
+                </section>
+
                 <div class="form-control shadow p-4">
 
-                    <form class="g-3 p-3 form-control-sm" th:action="@{'/users/modify/' + ${users.id}}" method="POST"
-                        enctype="multipart/form-data">
+                    <form class="g-3 p-3 form-control-sm" th:if="${users != null}"
+                        th:action="@{'/users/modify/' + ${users.id}}" method="POST" enctype="multipart/form-data">
 
 
                         <div class="row mb-3">
@@ -100,13 +110,11 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3 align-items-center">
-                            <label for="" class="col-sm-4 col-form-label">Estado</label>
+                        <div class="row mb-3 align-items-center" th:if="${users.active != null}">
+                            <label for="inputRol" class="col-sm-4 col-form-label">Estado</label>
                             <div class="col-sm-8">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                                        name="active" th:checked="${users.active}">
-                                </div>
+                                <span th:if="${users.active}" class="badge bg-success">Activo</span>
+                                <span th:unless="${users.active}" class="badge bg-warning">Inactivo</span>
                             </div>
                         </div>
 
@@ -122,7 +130,7 @@
                 <section class=" text-center container">
                     <div class="row mt-5">
                         <div class="divVolver">
-                            <a th:href="@{/home}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                            <a th:href="@{/listUsers}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                         </div>
                     </div>
                 </section>

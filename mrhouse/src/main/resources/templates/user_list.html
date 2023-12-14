@@ -62,24 +62,24 @@
                             <span th:if="${user.active}" class="badge bg-success">Activo</span>
                             <span th:unless="${user.active}" class="badge bg-warning">Inactivo</span>
                         </td>
-                        
+
                         <!-- Acciones -->
                         <td>
                             <div class="d-flex justify-content-center">
 
                                 <!-- Botón Modificar -->
-                                <a th:href="@{/users/modify/{userId}(userId=${user.id})}" class="btn btn-sm mx-1 btn-secondary">
+                                <a th:href="@{/users/modify/{userId}(userId=${user.id})}"
+                                    class="btn btn-sm mx-1 btn-secondary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
                                 <!-- Boton Eliminar -->
-                                <form th:action="@{/users/modify/(id=${user.id})}" method="post">
-
+                                <form th:action="@{/users/toggleStatus/{id}(id=${user.id})}" method="POST">
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3-fill"></i>
+                                        <i class="bi bi-trash-fill"></i>
                                     </button>
-
                                 </form>
+
                             </div>
                         </td>
                     </tr>

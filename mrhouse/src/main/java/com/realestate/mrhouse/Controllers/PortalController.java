@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -107,10 +108,10 @@ public class PortalController {
     @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @PostMapping("/profile/{id}")
     public String update(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
-            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, Boolean active, ModelMap modelo) {
+            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
 
         try {
-            userService.actualizar(id, name, email, password, password2, dni, rol, active);
+            userService.actualizar(id, name, email, password, password2, dni, rol);
             modelo.put("exito", "usuario fue actualizado correctamente");
             return ("/home.html");
         } catch (MyException ex) {
@@ -144,17 +145,34 @@ public class PortalController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/users/modify/{id}")
     public String userModify(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
-            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, Boolean active, ModelMap modelo) {
+            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol,
+            ModelMap modelo, RedirectAttributes redirectAttributes) {
 
         try {
+            userService.actualizar(id, name, email, password, password2, dni, rol);
+            redirectAttributes.addFlashAttribute("exito", "El usuario fue actualizado correctamente");
+            return "redirect:/users/modify/" + id;
 
-            userService.actualizar(id, name, email, password, password2, dni, rol, active);
-            modelo.put("exito", "usuario fue actualizado correctamente");
-            return ("/panel.html");
+        } catch (MyException ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            redirectAttributes.addFlashAttribute("name", name);
+            redirectAttributes.addFlashAttribute("email", email);
+            return "redirect:/users/modify/" + id;
+        }
+
+    }
+
+//    Boton Eliminar en User List
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PostMapping("/users/toggleStatus/{id}")
+    public String toggleStatus(@PathVariable("id") Long id, ModelMap modelo) {
+
+        try {
+            userService.toggleStatus(id);
+            modelo.put("exito", "usuario fue eliminado  correctamente");
+            return "redirect:/listUsers";
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
-            modelo.put("name", name);
-            modelo.put("email", email);
             return "user_modify_admin.html";
         }
 
