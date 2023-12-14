@@ -56,6 +56,8 @@ public class UserService implements UserDetailsService {
         user.setDni(dni);
 
         user.setRol(rol);
+        
+        user.setActive(true);
 
         userRepository.save(user);
 
@@ -64,7 +66,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void actualizar(Long idUser, String name, String email, String password, String password2, Long dni, Rol rol) throws MyException {
+    public void actualizar(Long idUser, String name, String email, String password, String password2, Long dni, Rol rol, Boolean active) throws MyException {
         validation(name, email, password, password2, dni, rol);
 
         Optional<Users> reply = userRepository.findById(idUser);
@@ -76,6 +78,7 @@ public class UserService implements UserDetailsService {
             u.setEmail(email);
             u.setPassword(new BCryptPasswordEncoder().encode(password));
             u.setRol(rol);
+            u.setActive(active);
 
         }
 

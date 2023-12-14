@@ -107,10 +107,10 @@ public class PortalController {
     @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @PostMapping("/profile/{id}")
     public String update(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
-            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
+            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, Boolean active, ModelMap modelo) {
 
         try {
-            userService.actualizar(id, name, email, password, password2, dni, rol);
+            userService.actualizar(id, name, email, password, password2, dni, rol, active);
             modelo.put("exito", "usuario fue actualizado correctamente");
             return ("/home.html");
         } catch (MyException ex) {
@@ -137,18 +137,18 @@ public class PortalController {
         Users users = userService.getOne(id);
         modelo.put("users", users);
 
-        return "user_modify.html";
+        return "user_modify_admin.html";
 
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/users/modify/{id}")
     public String userModify(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
-            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
+            @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, Boolean active, ModelMap modelo) {
 
         try {
 
-            userService.actualizar(id, name, email, password, password2, dni, rol);
+            userService.actualizar(id, name, email, password, password2, dni, rol, active);
             modelo.put("exito", "usuario fue actualizado correctamente");
             return ("/panel.html");
         } catch (MyException ex) {

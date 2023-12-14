@@ -7,6 +7,7 @@ package com.realestate.mrhouse.Entities;
 
 import com.realestate.mrhouse.Relations.Rol;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,7 +25,6 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 public class Users {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,14 +36,14 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
+    @Column(name = "active", nullable = false)
+    private boolean active;
+
     /* @OneToOne
     private Imagen imagen;
      */
-
     public Users() {
     }
-
-
 
     public Long getId() {
         return id;
@@ -93,6 +93,12 @@ public class Users {
         this.rol = rol;
     }
 
-    
-    
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
 }
