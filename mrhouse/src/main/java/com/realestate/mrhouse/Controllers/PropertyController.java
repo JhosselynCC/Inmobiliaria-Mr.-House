@@ -151,6 +151,14 @@ public class PropertyController {
 
     }
 
+    //LISTAR POR RANKING 4 DE ULTMOS PUBLICADOS 
+    @GetMapping("/ranking")
+    public String mostrarUltimasPropiedades(ModelMap model) {
+        List<Property> latestProperties = propertyService.getLatestAlquilerAndVentaProperties();
+        model.addAttribute("properties", latestProperties);
+        return "ranking.html";
+    }
+
     //LISTAR PUBLICACIONES POR PUBLICADOR LOGUEADO
     @GetMapping("/propertyByPublisher")
     public String listPropertyByPublisher(Model model, Principal principal) {

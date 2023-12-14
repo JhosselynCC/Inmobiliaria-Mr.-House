@@ -32,13 +32,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> findPropertiesByPublisherDni(@Param("dni") Long dni);
 
     // Consulta para obtener todas las propiedades de alquiler con filtros
-    /*
-    @Query("SELECT p FROM Property p WHERE p.city = :city  AND p.typeProperty = :type")
-    List<Property> findPropertiesByCityAndType(
-            @Param("city") City city,
-            
-            @Param("type") TypeProperty type
-    );*/
+
     @Query("SELECT p FROM Property p WHERE "
             + "(:city IS NULL OR p.city = :city OR :city = 'TODOS') AND "
             + "(:type IS NULL OR p.typeProperty = :type OR :type = 'TODOS') AND"
@@ -49,10 +43,14 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
             @Param("price") Double price
     );
 
-    /*
-    @Query("SELECT p FROM Property p WHERE"
-            + " CONCAT(p.typeProperty,p.province)"
-            + " LIKE %?1%")
-    public List<Property> showAll(String type,String province);
-     */
+    // Consulta para obtener las ultimas publicaciones por tipo de publicacion se limira a que muestre 2 por tipo
+    
+     @Query("SELECT p FROM Property p WHERE p.typePublication = 'ALQUILER' ORDER BY p.alta DESC")
+    List<Property> findLatestAlquilerProperties();
+
+    @Query("SELECT p FROM Property p WHERE p.typePublication = 'VENTA' ORDER BY p.alta DESC")
+    List<Property> findLatestVentaProperties();
+
+    @Query("SELECT p FROM Property p WHERE p IN :properties ORDER BY p.alta DESC")
+    List<Property> findLatestProperties(@Param("properties") List<Property> properties);
 }

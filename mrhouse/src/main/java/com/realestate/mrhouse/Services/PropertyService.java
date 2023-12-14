@@ -20,9 +20,11 @@ import com.realestate.mrhouse.Repositories.PropertyRepository;
 import com.realestate.mrhouse.Repositories.PublishersRepository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,6 +183,8 @@ public class PropertyService {
         return alquileres3;
     }
 
+    
+    //Servicio para controlador de filtros en alquilar
     public List<Property> findPropertiesByCityAndType(City city, TypeProperty type,Double price) {
         return propertyRepository.findPropertiesByCityAndTypeAndPrice(city,type,price);
     }
@@ -272,6 +276,34 @@ public class PropertyService {
         }
     }
      */
+    
+    //Servicio para obtener las ultimas publicaciones por tipo de publicacion
+    public List<Property> getLatestAlquilerAndVentaProperties() {
+        // Obtener las últimas 2 propiedades de alquiler
+        List<Property> latestAlquilerProperties = propertyRepository.findLatestAlquilerProperties().stream()
+                .limit(2)
+                .collect(Collectors.toList());
+
+        // Obtener las últimas 2 propiedades de venta
+        List<Property> latestVentaProperties = propertyRepository.findLatestVentaProperties().stream()
+                .limit(2)
+                .collect(Collectors.toList());
+
+        // Combinar las listas de alquiler y venta
+        List<Property> latestAlquilerAndVentaProperties = new ArrayList<>();
+        latestAlquilerAndVentaProperties.addAll(latestAlquilerProperties);
+        latestAlquilerAndVentaProperties.addAll(latestVentaProperties);
+
+        // Ordenar la lista combinada por fecha de alta
+        latestAlquilerAndVentaProperties.sort(Comparator.comparing(Property::getAlta).reversed());
+
+        // Limitar la lista a 4 propiedades
+        return latestAlquilerAndVentaProperties.stream().limit(4).collect(Collectors.toList());
+    }
+    
+    
+    
+    
     public Property getOne(Long id) {
         return propertyRepository.getOne(id);
     }
