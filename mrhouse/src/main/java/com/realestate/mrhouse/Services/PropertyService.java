@@ -45,28 +45,23 @@ public class PropertyService {
 
     @Autowired
     private ImageRepository imageRepository;
-    
-    
 
     @Autowired
-    public PropertyService(PropertyRepository propertyRepository,  ImageRepository  imageRepository) {
+    public PropertyService(PropertyRepository propertyRepository, ImageRepository imageRepository) {
         this.propertyRepository = propertyRepository;
         this.imageRepository = imageRepository;
     }
 
-    
-    
     @Transactional
     public void createProperty(List<MultipartFile> images, String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, Long idPublisher) throws MyException {
 
         validar(typePublication, title, typeProperty, features, price, images, location, province, city, idPublisher);
 
         Publishers p = publisherRepository.findById(idPublisher).get();
-                
+
         /*   autor a = autorRepositorio.findById(IdAutor).get();
                 .orElseThrow(() -> new MyException("Publisher no encontrado con ID: " + idPublisher));
          */
-
         Property property = new Property();
 
         property.setTypePublication(TypePublication.valueOf(typePublication));
@@ -92,10 +87,9 @@ public class PropertyService {
         propertyRepository.save(property);
     }
 
-    
     /*
     
-    */
+     */
     public List<Property> listProperties() {
 
         /* public List<Property> listProperties() {
@@ -104,8 +98,7 @@ public class PropertyService {
         return properties;
     }
          */
-        
-        /*
+ /*
         List<Property> properties = new ArrayList();
 
         for (Property property : properties) {
@@ -128,8 +121,6 @@ public class PropertyService {
         properties = propertyRepository.findAll();
 
         return properties;*/
-        
-            
         return propertyRepository.findAll();
     }
 
@@ -137,13 +128,10 @@ public class PropertyService {
         return imageRepository.findByPropertyId(propertyId);
     }
 
-    
-    
     /*
     *Funciones para Alquilar
-    */
-    
-        public List<Property> listAlquiler() {
+     */
+    public List<Property> listAlquiler() {
         List<Property> properties = listProperties();
 
         List<Property> alquileres = new ArrayList<>();
@@ -176,9 +164,8 @@ public class PropertyService {
         while (it.hasNext()) {
             Property aux = it.next();
 
-
             if (aux.getId() != id) {
-                
+
                 iterar += 1;
 
                 if (iterar <= 3) {
@@ -193,14 +180,16 @@ public class PropertyService {
 
         return alquileres3;
     }
-    
-    
-    
+
+    public List<Property> findPropertiesByCityAndType(City city, TypeProperty type,Double price) {
+        return propertyRepository.findPropertiesByCityAndTypeAndPrice(city,type,price);
+    }
+
+
     /*
     *Funciones para Comprar
-    */
-    
-        public List<Property> listComprar() {
+     */
+    public List<Property> listComprar() {
         List<Property> properties = listProperties();
 
         List<Property> comprar = new ArrayList<>();
@@ -233,9 +222,8 @@ public class PropertyService {
         while (it.hasNext()) {
             Property aux = it.next();
 
-
             if (aux.getId() != id) {
-                
+
                 iterar += 1;
 
                 if (iterar <= 3) {

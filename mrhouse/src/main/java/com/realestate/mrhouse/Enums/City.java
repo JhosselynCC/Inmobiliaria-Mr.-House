@@ -10,6 +10,7 @@ package com.realestate.mrhouse.Enums;
  * @author Usuario
  */
 public enum City {
+    TODOS("TODOS"),
     CORDOBA("Cordoba"),
     ROSARIO("Rosario"),
     MENDOZA("Mendoza"),
@@ -33,7 +34,8 @@ public enum City {
     SANTA_ROSA("Santa Rosa"),
     USHUAIA("Ushuaia"),
     VIEDMA("Viedma"),
-    JUJUY("Jujuy");
+    JUJUY("Jujuy"),
+    CABA("Ciudad de Buenos Aires");
     
     private final String nombre;
     

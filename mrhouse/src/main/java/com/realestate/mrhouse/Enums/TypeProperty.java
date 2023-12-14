@@ -10,6 +10,7 @@ package com.realestate.mrhouse.Enums;
  * @author 2171584201008
  */
 public enum TypeProperty {
+    TODOS,
     CASA,
     DEPARTAMENTO,
     PH,

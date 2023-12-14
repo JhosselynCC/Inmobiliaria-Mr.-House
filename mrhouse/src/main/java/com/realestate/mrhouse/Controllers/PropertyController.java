@@ -25,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.hibernate.annotations.common.util.impl.LoggerFactory.logger;
@@ -293,6 +294,7 @@ public class PropertyController {
         Date startTime;
 
         try {
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             startTime = dateFormat.parse(startTimeString);
             shiftsByPropertyService.createShiftsByProperty(id, startTime);
             modelo.put("exito", "El turno fue cargado correctamente");
