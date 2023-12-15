@@ -1,0 +1,85 @@
+.contenedor{
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.card{
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    transition: 0.50s all ease-in-out;
+
+}
+
+.card-body{
+    width: 100%;
+    height: 200px;
+}
+
+.card:hover{
+    transform: scale(1.1);
+}
+
+
+
+.card img {
+    width: 170%;
+    height: 270px;
+    margin-left: -35%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 12px 1px rgba(0, 0, 0 , 0.2); 
+}
+
+.card-body .card-title{
+    text-align: left;
+    font-size: small;
+}
+
+
+.card-body .detail{
+    font-size:smaller;
+    margin-top: -10px;
+    text-align: left;
+    color: grey;
+    
+}
+
+
+.user-select{
+    background-color: rgb(172, 209, 252);
+    border-radius: 20px;
+    box-shadow: 1px 1px 12px 1px rgba(0, 0, 0 , 0.2);
+    padding: -20px;
+}
+
+.filtros{
+    display: flex;
+    margin-left: 25%;
+    margin-top: 50px;
+    text-align: center;
+    
+}
+
+.ingresar{
+    margin-right: 20px;
+    margin-top: -90px;
+    padding: 30px;
+}
+
+.form-label{
+    color: white;
+}
+
+::placeholder { color: #0d6efd;}
+
+.detail{
+    margin-top: -10px;
+    text-align: left;
+    color: grey;
+}
+
+
+
+
+

@@ -30,26 +30,10 @@ and open the template in the editor.
                         <div class="form-group my-3">
 
                             <input type="text" name="idPublisher" class="form-control" placeholder="Ingresar DNI del publicador" />
-                            <!-- <select name="idPublisher" class="form-select">
-                                 <option>Seleccionar publicador</option>
-                                 <option th:each="Publishers : ${publishers}" th:value="${Publishers.dni}"
-                                         th:text="${Publishers.dni}" />
-                             </select>-->
 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <!-- <label for="formGroupExampleInput" class="form-label">Tipo Publicacion</label>
-                                 <input type="text" class="form-control" id="formGroupExampleInput"
-                                        placeholder="Casa con cochera sobre avenida" required>
-                                 typePublication, title, features, price, images, location, province, city, idPublisher
-                            
-                            <select name="typePublication" id="typeOwner" class="form-select" required>
-                                <option hidden selected>Tipo Publicacion</option>
-                                <option value="VENTA">Venta</option>
-                                <option value="ALQUILER">Alquiler</option>
-                                <option value="TEMPORADA">Temporada</option>
 
-                            </select> -->
 
                             <select class="form-select mb-3" name="typePublication" required>
                                 <option th:each="typePublication : ${T(com.realestate.mrhouse.Enums.TypePublication).values()}"
@@ -59,23 +43,7 @@ and open the template in the editor.
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <!--  <label class="form-label">Tipo</label>
-                                
-                                 <select class="form-select" aria-label="Default select example" required>
-                                     <option selected>Casa</option>
-                                     <option value="1">Departamento</option>
-                                 </select>
-                           
-                            <select name="typeProperty" id="typeOwner" class="form-select" required>
-                                <option hidden selected>Tipo Propiedad</option>
-                                <option value="CASA">Casa</option>
-                                <option value="DEPARTAMENTO">Departamento</option>
-                                <option value="PH">Ph</option>
-                                <option value="LOCAL">Local</option>
-                                <option value="DEPOSITO">Deposito</option>
-                                <option value="COCHERAS">Cocheras</option>
-
-                            </select>-->
+                    
 
                             <select class="form-select mb-3" name="typeProperty" required>
                                 <option th:each="typeProperty: ${T(com.realestate.mrhouse.Enums.TypeProperty).values()}"
@@ -90,13 +58,6 @@ and open the template in the editor.
                         </div>
 
 
-                        <!--
-                            <div class="col-md-8 mb-3">
-                                <label for="formGroupExampleInput" class="form-label">Caracteristicas</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput"
-                                       placeholder="Casa con cochera sobre avenida" required>
-                            </div>
-                        -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Precio</label>
                             <div class="input-group">
@@ -149,11 +110,16 @@ and open the template in the editor.
 
 
 
-                        <div class="col-12 text-start">
-                            <button type="submit" class="btn btn-dark">Publicar</button>
-                            <button type="reset" class="btn btn-secondary">Limpiar</button>
+                        <div class="col-12 text-start ">
+                            <button type="submit" class="mx-2 btn btn-primary ">Publicar</button>
+                            <button type="reset" class="mx-2 btn btn-secondary">Limpiar</button>
+                            <button class="btn btn-warning mx-5" >
+                            <a th:href="@{/publishers/register}" class=" mx-3 mt-3">Registrarse como publicador</a>
+                            </button>
                         </div>
-                    </form>
+
+                    </form>                      
+
                 </div>
             </div>
 
@@ -167,7 +133,7 @@ and open the template in the editor.
                     venta.</p>
 
                 <div>
-                    <i class="bi bi-facebook p-1 fs-5"> Mr.House</i>
+                    <i class="bi bi-facebook p-1 fs-5"  href="https://www.facebook.com/"> Mr.House</i>
                     <i class="bi bi-instagram p-1 fs-5"> Mr.House</i>
                     <i class="bi bi-whatsapp p-1 fs-5"> Mr.House</i>
                     <i class=""></i>
@@ -193,14 +159,14 @@ and open the template in the editor.
                 <p class="card-text" th:text="${exito}"></p>
             </div>
         </div>
-
+<!-- 
         <section class=" text-center container">
             <div class="row mt-3">
                 <div class="divVolver">
                     <a th:href="@{/publishers/register}" class="btn btn-secondary my-2 botonVolver botones">Registrarse como publicador</a>
                 </div>
             </div>
-        </section>
+        </section> -->
 
     </main>
     <!-- Footer -->

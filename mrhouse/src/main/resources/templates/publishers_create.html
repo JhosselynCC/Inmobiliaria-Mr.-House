@@ -22,75 +22,79 @@ and open the template in the editor.
     </head>
 
     <body>
-
+        
         <!-- Header, Navbar -->
         <header th:replace="/fragments/header::header"></header>
         
         
         
-            <div class="container">
-                <h2>Datos del  publicador </h2>
-            </div>
-        
-
-        <div class="container">
-            <form th:action= "@{/publishers/registration}" method="POST">
-                <div class="form-group">                 
-                    <!--<input type="text" class="form-group" name="typeOwner" placeholder="Entidad"> -->
-                    <input type="text" class="form-group" name="dni" placeholder="DNI">
-                    <input type="text" class="form-group" name="name" placeholder="nombre o Razon Social">
-
-
-                    <br>
-
-
-                    <select class="form-select mb-3" name="typeOwner">
-                        <option th:each="typeOwner : ${T(com.realestate.mrhouse.Enums.TypeOwner).values()}"
-                                th:value="${typeOwner}" th:text="${typeOwner}"></option>
-                    </select>
-                    <!--
-                    <select name="typeOwner" id="typeOwner" class="form-select" required>
-                        <option hidden selected>Tipo de propietario</option>
-                        <option value="INMOBILIARIA">Inmobiliaria</option>
-                        <option value="DUENODIRECTO">Dueño Directo</option>
-                    </select>
-                    -->
-
-                </div>
-                <button type="submit" class="btn btn-primary"> Subir</button>
-            </form>
-
+        <main>
             <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
                 <div class="card-body">
                     <h5 class="card-title">Error 👎</h5>
                     <p class="card-text" th:text="${error}"></p>
                 </div>
             </div>
-
+            
             <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
                 <div class="card-body">
                     <h5 class="card-title">Exito!</h5>
                     <p class="card-text" th:text="${exito}"></p>
                 </div>
             </div>
+            
+            <div class="container">
+        <h2>Datos del  publicador </h2>
+    </div>
+    
+    <div class="container mb-4 justify-content-center">
+        <form th:action= "@{/publishers/registration}" method="POST">
+            <div class="form-group">                 
+                <br>
+                <input type="text" class="form-group" name="dni" placeholder="DNI">
+                
+                <br>
+                <br>
+                <input type="text" class="form-group" name="name" placeholder="nombre o Razon Social">
+                
+                <br>
+                <br>
 
-            <section class=" text-center container">
+                <select class="form-select mb-3" name="typeOwner">
+                    <option th:each="typeOwner : ${T(com.realestate.mrhouse.Enums.TypeOwner).values()}"
+                    th:value="${typeOwner}" th:text="${typeOwner}"></option>
+                </select>
+                
+            </div>
+            <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mx-5"> Subir</button>
+                    <button class="btn btn-warning mx-5 justify-end" >
+                        <a th:href="@{/login}" class=" mx-3 mt-3">Ingresar o Registrarse</a>
+                    </button>
+                </div>
+            </form>
+            
+            
+            <!-- <section class=" text-center container">
                 <div class="row mt-3">
                     <div class="divVolver">
                         <a th:href="@{/login}" class="btn btn-secondary my-2 botonVolver botones">Ingresar o Registrarse</a>
                     </div>
                 </div>
-            </section>
-
-
+            </section> -->
+            
+            
         </div>
-
+        
         <footer th:replace="/fragments/footer::footer"></footer>
-
-
+        
+        
         <!-- Script de Boostrap.js -->
         <script th:replace="/fragments/script::script"></script>
+        
+    </main>
     </body>
-</html>
-
-
+    </html>
+    
+    
+    
