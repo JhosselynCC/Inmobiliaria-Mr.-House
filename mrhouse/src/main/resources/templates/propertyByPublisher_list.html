@@ -36,10 +36,7 @@
                             <th scope="col">precio</th>
                             <th scope="col">ciudad</th> 
                             <th scope="col">imagen</th> 
-
-                            <th scope="col"  >Acciones</th>
-                            , 
-
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody th:each="Property : ${properties}"> 
@@ -53,24 +50,15 @@
 
 
                             <td>
-
-                                <!-- <a><img th:if="${Property.image != null}" class="logo" th:src="@{/image/photos/__${Property.id}__}"></a>--> 
                                 <ul>
-                                    <!--
-                                    <li th:each="Property : ${properties}">
-                                        <a th:href="@{/properties/view/{id}(id=${Property.id})}" </a> <!--th:text="${Property.title}">
-                                        th:src="@{/image/view/{id}(id=${image.id})}" alt="Property Image"
-                                    </li>
-                                    -->
                                     <li th:each="image : ${Property.image}">
                                         <img th:src="@{/image/view/{id}(id=${image.id})}" alt="Property Image" style="width: 100px; height: 100px;"/>
-
                                     </li>
-
-
                                 </ul>
                             </td>
-
+                          <td>
+                              <a th:href="@{/property/editProperty/__${Property.id}__}"> Modificar publicacion </a>
+                          </td>
                         </tr>
 
                     </tbody>

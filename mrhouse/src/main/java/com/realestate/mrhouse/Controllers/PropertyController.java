@@ -401,5 +401,41 @@ public class PropertyController {
 
         return "shiftsByPropertyPublisher_list.html";
     }
+    
+    @GetMapping("/editProperty/{id}")
+    public String editProperty(@PathVariable Long id, ModelMap modelo) {
+      
+        modelo.put("property", propertyService.getOne(id));
+        
+        List<Publishers> publishers = publishersService.listPublishers();
+        
+        modelo.addAttribute("publishers", publishers);
+        
+        return "property_modify.html";
+    }
+
+    @PostMapping("/editProperty/{id}")
+    public String editProperty(@PathVariable Long id, String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, Long idPublishers, ModelMap modelo) {
+        try {
+            List<Publishers> publishers = publishersService.listPublishers();
+            
+            modelo.addAttribute("publishers", publishers);
+
+            propertyService.editProperty(id, typePublication, title, typeProperty, features, price, location, province, city, idPublishers);
+            
+                        
+            return "index.html";
+
+        } catch (MyException ex) {
+            List<Publishers> publishers = publishersService.listPublishers();
+            
+            modelo.put("error", ex.getMessage());
+            
+            modelo.addAttribute("publishers", publishers);
+            
+            return "property_modify.html";
+        }
+
+    }
 
 }

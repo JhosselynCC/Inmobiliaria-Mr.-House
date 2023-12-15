@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -344,4 +345,71 @@ public class PropertyService {
         }
 
     }
+    
+    @Transactional
+    public void editProperty(Long id, String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, Long idPublishers) throws MyException {
+        validarDos(typePublication, title, typeProperty, features, price, location, province, city, idPublishers);
+        Optional<Property> respuesta = propertyRepository.findById(id);
+        Optional<Publishers> respuestaPublisher = publisherRepository.findById(idPublishers);
+        Publishers publishers = new Publishers();
+
+        if (respuestaPublisher.isPresent()) {
+
+            publishers = respuestaPublisher.get();
+        }
+
+        if (respuesta.isPresent()) {
+
+            Property property = respuesta.get();
+
+            property.setTitle(title);
+
+            property.setPublishers(publishers);
+
+            property.getTypePublication();
+
+            property.setPrice(price);
+
+            property.setFeatures(features);
+
+//            property.setImages((List<Image>) images);
+
+            propertyRepository.save(property);
+
+        }
+    }
+    
+    private void validarDos(String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, Long idPublisher) throws MyException {
+        if (typePublication == null) {
+            throw new MyException("El tipo de publicacion no puede ser nulo");
+        }
+        if (title.isEmpty() || title == null) {
+            throw new MyException("El titulo no puede ser nulo o estar vacio");
+        }
+        if (typeProperty == null) {
+            throw new MyException("El tipo de propiedad no puede ser nulo");
+        }
+        if (features.isEmpty() || features == null) {
+            throw new MyException("Las caracteristicas no pueden ser nulas o estar vacias");
+        }
+        if (price.isNaN() || price == null) {
+            throw new MyException("El valor no puede ser nulo o estar vacio");
+        }
+
+        
+        if (location.isEmpty() || location == null) {
+            throw new MyException("La ubicacion no puede ser nula o estar vacia");
+        }
+        if (province == null) {
+            throw new MyException("La provincia no puede ser nula");
+        }
+        if (city == null) {
+            throw new MyException("La ciudad no puede ser nula");
+        }
+        if (idPublisher == null) {
+            throw new MyException("El Id del Publisher no puede ser nulo o estar vacio");
+        }
+
+    }
+    
 }

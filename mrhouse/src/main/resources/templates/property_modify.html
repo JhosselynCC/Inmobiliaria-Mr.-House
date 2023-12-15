@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+
+        <title>Crear Publicacion | Mr.House</title>
+    <head th:replace="/fragments/head::head"></head>
+
+</head>
+
+<body style="background-color: #F7F7F7;">
+
+    <!-- Header, Navbar -->
+    <header th:replace="/fragments/header::header"></header>
+
+    <main class="container pt-5 pb-5">
+        <section class="row text-center border rounded justify-content-center bg-white shadow">
+
+            <!-- Columna Formulario -->
+            <div class="col-md-7 p-5 order-sm-2 order-md-1">
+                <div>
+                    <form class="row g-3" th:action="@{/property/editProperty/__${id}__}" method="POST"
+                          enctype="multipart/form-data">
+
+                        <input hidden th:value="${property.id}" type="text" class="form-control" name="id" placeholder="id">
+                        <input hidden th:value="${property.typePublication}" type="text" class="form-control" name="typePublication" placeholder="typePublication">
+                        <input hidden th:value="${property.typeProperty}" type="text" class="form-control" name="typeProperty" placeholder="typeProperty">
+                        <input hidden th:value="${property.location}" type="text" class="form-control" name="location" placeholder="location">
+                        <input hidden th:value="${property.province}" type="text" class="form-control" name="province" placeholder="province">
+                        <input hidden th:value="${property.city}" type="text" class="form-control" name="city" placeholder="city">
+                        <input hidden th:value="${property.publishers.dni}" type="text" class="form-control" name="idPublishers" placeholder="idpublishers">
+
+
+                        <div class="col-md-8 mb-3">
+                            <label for="formGroupExampleInput" class="form-label">Titulo</label>
+                            <input th:value="${property.title}" type="text" class="form-control" id="formGroupExampleInput" name="title"
+                                   placeholder="Titulo nuevo" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nuevo Precio</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input th:value="${property.price}" type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                       name="price">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                        
+                        <!--
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Imagen del Inmueble</label>
+                            <input type="file" multiple name="images" class="form-control" id="files" accept="images/*"
+                                   required>
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
+                        </div>
+                         -->
+                        <div class="col-12 mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Descripción del Inmueble</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="features"
+                                      rows="3"></textarea>
+                        </div>
+
+
+
+                        <div class="col-12 text-start">
+                            <button type="submit" class="btn btn-dark">Editar</button>
+                            <button type="reset" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Columna Descripcion -->
+            <div class="col-md-5 p-5 bg-venta text-white order-sm-1 order-md-2"
+                 style="border-radius: 0rem 0.25rem 0.25rem 0rem;">
+                <h2 class="mb-4">¡Venta de propiedades!</h2>
+                <h6 class="mb-5 text-">Queremos que esta experiencia sea lo más sencilla posible para ti.</h6>
+
+                <p>No dudes en contactarnos si necesitas asistencia adicional o tienes preguntas durante el proceso de
+                    venta.</p>
+
+                <div>
+                    <i class="bi bi-facebook p-1 fs-5"> Mr.House</i>
+                    <i class="bi bi-instagram p-1 fs-5"> Mr.House</i>
+                    <i class="bi bi-whatsapp p-1 fs-5"> Mr.House</i>
+                    <i class=""></i>
+                </div>
+            </div>
+
+        </section>
+        
+        
+        
+        
+
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+            <div class="card-body">
+                <h5 class="card-title">Error 👎</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+
+        <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+            <div class="card-body">
+                <h5 class="card-title">Exito!</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+
+        <section class=" text-center container">
+            <div class="row mt-3">
+                <div class="divVolver">
+                    <a th:href="@{/publishers/register}" class="btn btn-secondary my-2 botonVolver botones">Registrarse como publicador</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- Footer -->
+    <footer th:replace="/fragments/footer::footer"></footer>
+
+
+    <!-- Script de Boostrap.js -->
+    <script th:replace="/fragments/script::script"></script>
+</body>
+
+</html>
