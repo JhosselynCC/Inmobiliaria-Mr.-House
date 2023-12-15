@@ -45,13 +45,28 @@ public class AlquilarController {
     @GetMapping("/property/{id}")
     public String alquilarProperty(@PathVariable Long id, ModelMap modelo) {
 
+        boolean hayCartas=false;
+
+
+        List<Property>properties = propertyService.listAlquiler5(id);
+
+        if(!properties.isEmpty()){
+
+            hayCartas = true;
+
+        }
+
+
+        modelo.addAttribute("hayCartas", hayCartas);
+
+
         modelo.put("property", propertyService.getOne(id));
 
-        List<Property> properties = propertyService.listAlquiler3(id);
 
-        modelo.addAttribute("properties", properties);
+        modelo.addAttribute("properties",properties);
 
-        return "detail_property.html";
+
+        return "detail_property1.html";
     }
 
   

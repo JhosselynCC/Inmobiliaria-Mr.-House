@@ -16,8 +16,8 @@
                 <li class="nav-item nav-item1">
                     <a class="nav-link" href="/alquilar">Alquilar</a>
                 </li>
-                <li class="nav-item nav-item1">
-                    <a class="nav-link" sec:authorize="hasRole('ADMIN') or hasRole('ENTE')" th:href="@{/property/register}">Publicar</a>
+                <li class="nav-item nav-item1" sec:authorize="hasRole('ADMIN') or hasRole('ENTE')">
+                    <a class="nav-link"  th:href="@{/property/register}">Publicar</a>
                 </li>
                 <li class="nav-item nav-item1">
                     <a class="nav-link" href="/blog">Blog</a>

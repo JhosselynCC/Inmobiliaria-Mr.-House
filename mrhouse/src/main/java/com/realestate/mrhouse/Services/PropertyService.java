@@ -153,11 +153,11 @@ public class PropertyService {
         return alquileres;
     }
 
-    public List<Property> listAlquiler3(Long id) {
+    public List<Property> listAlquiler5(Long id) {
 
         int iterar = 0;
 
-        List<Property> alquileres3 = new ArrayList<>();
+        List<Property> alquileres5 = new ArrayList<>();
 
         List<Property> alquileres = listAlquiler();
 
@@ -166,13 +166,14 @@ public class PropertyService {
         while (it.hasNext()) {
             Property aux = it.next();
 
-            if (aux.getId() != id) {
 
+            if (aux.getId() != id) {
+                
                 iterar += 1;
 
-                if (iterar <= 3) {
+                if (iterar <= 5) {
 
-                    alquileres3.add(aux);
+                    alquileres5.add(aux);
 
                 }
 
@@ -180,7 +181,7 @@ public class PropertyService {
 
         }
 
-        return alquileres3;
+        return alquileres5;
     }
 
     
@@ -213,11 +214,11 @@ public class PropertyService {
         return comprar;
     }
 
-    public List<Property> listComprar3(Long id) {
+    public List<Property> listComprar5(Long id) {
 
         int iterar = 0;
 
-        List<Property> comprar3 = new ArrayList<>();
+        List<Property> comprar5 = new ArrayList<>();
 
         List<Property> compras = listComprar();
 
@@ -226,13 +227,14 @@ public class PropertyService {
         while (it.hasNext()) {
             Property aux = it.next();
 
-            if (aux.getId() != id) {
 
+            if (aux.getId() != id) {
+                
                 iterar += 1;
 
-                if (iterar <= 3) {
+                if (iterar <= 5) {
 
-                    comprar3.add(aux);
+                    comprar5.add(aux);
 
                 }
 
@@ -240,7 +242,7 @@ public class PropertyService {
 
         }
 
-        return comprar3;
+        return comprar5;
     }
 
     /*

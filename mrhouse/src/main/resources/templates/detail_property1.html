@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+    <title>Real State Mr.House</title>
+
+    <head th:replace="/fragments/head::head"></head>
+    <link rel="stylesheet" th:href=" @{/css/styles_detail_property1.css}">
+</head>
+
+<body>
+
+    <header th:replace="/fragments/header::header"></header>
+
+    <div class="page">
+
+        <div class="sub-page">
+
+            <div class="property" th:action="@{/alquilar/property/{id}(id=${property.id})}">
+
+                <div class="presentation">
+
+                    <div class="images">
+
+                        <div class="image-principal">
+                            <img class="img-principal"
+                                th:src="@{/image/view/principal/__${image?.id}__/__${property?.image[0].id}__}"
+                                alt="Imagen no encontrada">
+                        </div>
+
+                        <div class="list-images">
+
+                            <button class="image" th:each="img : ${property.image}" th:attr="data-image-id=${img.id}"
+                                onclick="seleccionarImagen(this)">
+                                <img class="image-button" th:src="@{/image/view/__${img.id}__}" alt=" ">
+                            </button>
+
+                        </div>
+
+                        <script>
+                            // Función para seleccionar una imagen de la lista
+                            function seleccionarImagen(button) {
+                                var imageId = button.getAttribute('data-image-id');
+                                var imgPrincipal = document.querySelector('.img-principal');
+                                imgPrincipal.src = '/image/view/principal/' + imageId + '/${property.id}';
+                            }
+                        </script>
+
+
+                    </div>
+
+
+
+
+                    <div class="data">
+
+                        <div class="info">
+
+                            <div class="text-1" th:text="${property.typePublication}"></div>
+
+                            <div class="text-2" th:text="${property.title}"></div>
+
+                            <div class="text-3">
+                                <div>$</div>
+                                <div class="number" th:text="${property.price}">0.0</div>
+                                <div>0</div>
+                            </div>
+
+                            <div class="text-4">
+                                <div class="text-4-title">Ubicacion:</div>
+                                <div class="words">
+                                    <div class="text-4-subtitle">direccion:</div>
+                                    <div class="text-4-info" th:text="${property.location}"></div>
+                                </div>
+
+                                <div class="words">
+                                    <div class="text-4-subtitle">provincia:</div>
+                                    <div class="text-4-info" th:text="${property.province}"></div>
+                                </div>
+                                <div class="words">
+                                    <div class="text-4-subtitle">ciudad:</div>
+                                    <div class="text-4-info" th:text="${property.city}"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="buttons">
+
+
+                            <button class="button-property">
+
+                                <a class="a-property" th:href="@{/property/offers/__${property.id}__}">Contactar</a>
+
+                            </button>
+
+                            <button class="button-property">
+
+                                <a class="a-property" th:href="@{/property/shifts/__${property.id}__}">Solicitar
+                                    Turno</a>
+
+                            </button>
+
+
+                        </div>
+
+                        <div class="publisher">
+
+                            <img class="img-publisher" th:src="@{/img/usuario.jpg}" alt=" ">
+
+                            <div class="text-5" th:text="${property.publishers.name}"></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="sub-description">
+
+                    <div class="description-title">Descripcion:</div>
+                    <div class="text-6" th:text="${property.features}"></div>
+
+                </div>
+
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    // Verificar si hay cartas presentes
+                    if ($('.card').length === 0) {
+                        $('.properties').hide(); // Ocultar el div si no hay cartas
+                    }
+                });
+            </script>
+
+
+
+            <script>
+                // Después de cargar la página
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Obtener todos los enlaces de cartas
+                    var cardLinks = document.querySelectorAll('.card-a');
+
+                    // Iterar sobre cada enlace
+                    cardLinks.forEach(function (link) {
+                        // Obtener el tipo de publicación del atributo de datos
+                        var typePublication = link.getAttribute('data-type-publication');
+
+                        // Modificar la URL según el tipo de publicación
+                        link.href = '/' + (typePublication == 'ALQUILER' ? 'alquilar' : 'comprar') + link.getAttribute('href');
+                    });
+                });
+
+            </script>
+
+
+
+            <div class="properties" th:if="${hayCartas}">
+
+                <div class="properties-title">Ver otras propiedades:</div>
+
+                <div class="cards">
+
+                    <div class="card" th:each="prop : ${properties}">
+
+
+                        <div hidden class="card-id" th:text="${prop.id}"></div>
+
+                        <!--
+                        <script>
+
+                            var typePublication = document.getElementsByClassName('text-1');
+                            var id = document.getElementsByClassName('card-id');
+                            var url = document.querySelector('.card-a');
+                            var rutaPublication = "";
+
+                            if (typePublication === 'ALQUILER') {
+
+                                typePublication = "alquilar";
+
+                            } else {
+
+                                typePublication = "comprar";
+
+                            }
+
+                            url.url = '/' + typePublication + '/property/'+'__'+ id +'__';
+
+
+                        </script>
+-->
+                        <img class="card-img" th:src="@{/image/view/__${prop.image[0].id}__}" alt=" ">
+
+
+                        <div class="card-price">
+                            <div>$</div>
+                            <div id="card-number" th:text="${prop.price}">0.0</div>
+                            <div>0</div>
+                        </div>
+
+                        <div class="card-title" th:text="${prop.title}"></div>
+
+
+                        <button class="card-button">
+
+                            <a class="card-a" th:data-type-publication="${prop.typePublication}"
+                                th:href="@{/property/__${prop.id}__}">Ver Mas...</a>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer th:replace="/fragments/footer::footer"></footer>
+
+    <!-- Script de Boostrap.js -->
+    <script th:replace="/fragments/script::script"></script>
+
+
+
+</body>
+
+</html>

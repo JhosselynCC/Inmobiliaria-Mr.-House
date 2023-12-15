@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+.page {
+    width: 100vw;
+    height: 100%;
+}
+
+.sub-page {
+    width: 81.8vw;
+    height: 100%;
+    margin-left: 8.5%;
+}
+
+.property {
+    padding-top: 15px;
+    width: 100%;
+    height: auto;
+}
+
+.properties {
+    width: 100%;
+    /*height: auto;*/
+    height: 330px;
+
+    margin-top: 5px;
+
+
+}
+
+.presentation {
+    width: 100%;
+    height: 400px;
+    display: inline-flex;
+}
+
+.images {
+    width: 60%;
+    height: 100%;
+}
+
+.image-principal {
+    width: 80%;
+    height: 75%;
+    margin-left: 10%;
+}
+
+.img-principal {
+    width: 100%;
+    height: 100%;
+}
+
+.list-images {
+    padding-top: 1.5%;
+    width: 92%;
+    height: 25%;
+    margin-left: 3%;
+    display: inline-flex;
+}
+
+.image {
+
+    width: 23%;
+    height: 90%;
+    margin-left: 2.5%;
+    border: none;
+
+    border-radius: 5px;
+
+}
+
+
+
+.image-button {
+    width: 115%;
+    height: 95%;
+    margin-left: -8px;
+    margin-top: -3px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease-in-out;
+
+}
+
+
+
+
+.data {
+    width: 40%;
+    height: 100%;
+    border: 1px gray;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(158, 150, 150, 0.747);
+    transform: translateZ(0);
+    transition: transform 0.3s;
+}
+
+.info {
+    width: 100%;
+    height: 58%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.text-1 {
+    font-size: 15px;
+    margin-bottom: -5px;
+}
+
+.text-2 {
+    font-size: 23px;
+}
+
+.text-3 {
+    font-size: 33px;
+    display: inline-flex;
+    margin-top: -6px;
+}
+
+.text-4 {
+    margin-top: -6px;
+}
+
+.text-4-title {
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.words {
+    margin-top: 0px;
+    display: flex;
+}
+
+.text-4-subtitle {
+    font-size: 16px;
+}
+
+.text-4-info {
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.buttons {
+    width: 100%;
+    height: 22%;
+    display: inline-flex;
+    padding-left: 9px;
+}
+
+.button-property {
+    height: 50%;
+    width: 95%;
+    margin-top: 21.5px;
+    margin-right: 8px;
+    border: 1px gray;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(158, 150, 150, 0.747);
+    transform: translateZ(0);
+    transition: transform 0.3s;
+}
+
+.a-property {
+    text-decoration: none;
+    color: black;
+    
+}
+
+.publisher {
+    height: 20%;
+    width: 100%;
+    display: inline-flex;
+}
+
+.img-publisher {
+    height: 100%;
+    width: 20%;
+    border-radius: 10px;
+}
+
+.text-5 {
+    font-size: 22px;
+    margin-top: 23px;
+    margin-left: 10px;
+}
+
+.sub-description {
+    height: auto;
+    width: 100%;
+    padding-left: 5px;
+    padding-top: 4px;
+    word-wrap: break-word;
+}
+
+.description-title {
+    font-size: 20px;
+}
+
+.text-6 {
+    height: auto;
+    width: 100%;
+    margin: 0;
+    /* Elimina el margen predeterminado del párrafo */
+    /* Ajusta el relleno según tus preferencias */
+    box-sizing: border-box;
+    /* Asegura que el relleno no afecte el tamaño total */
+    white-space: pre-wrap;
+}
+
+.properties-title {
+    font-size: 23px;
+    padding-left: 7px;
+    margin-bottom: 12px;
+}
+
+.cards {
+    /*height: auto;*/
+    height: 270px;
+    width: 102%;
+    display: inline-flex;
+    padding-left: 10px;
+}
+
+.card {
+    height: 100%;
+    width: 18%;
+    margin-right: 30px;
+    border: 1px gray;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(158, 150, 150, 0.747);
+    transform: translateZ(0);
+    transition: transform 0.3s;
+}
+
+.card-img {
+    border-radius: 10px;
+    width: 100%;
+    height: 40%;
+}
+
+.card-price {
+    font-size: 25px;
+    display: inline-flex;
+    height: 9%;
+    width: 100%;
+    justify-content: center;
+}
+
+.card-title {
+    margin-top: 5%;
+    font-size: 20px;
+    height: 24%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    /* Número de líneas que deseas mostrar */
+    white-space: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.card-button {
+    margin-top: 5%;
+    width: 95%;
+    height: 12%;
+    margin-left: 2.5%;
+    border: 1px gray;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(158, 150, 150, 0.747);
+    transform: translateZ(0);
+    transition: transform 0.3s;
+}
+
+.card-a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+/*
+
+.image-img{
+    margin-left: -8px;
+    margin-top: -2px;
+    width: 138px;
+    height: 80px;
+}
+
+*/
+
+
+
+
+
+
+/*
+
+.page .sub-page{
+    width: 74.7vw;
+    height: 100vh;
+    background-color: aqua;
+    margin-left: 11.8%;
+    padding-top: 10px;
+    
+}
+
+.page .sub-page .property{
+    width: 100%;
+    background-color: blue;
+    height: 90.7vh;
+}
+
+.page .sub-page .properties{
+    width: 100vw;
+    height: 300px;
+    background-color: gold;
+}
+
+.page .sub-page .property .presentation{
+    width: 100%;
+    background-color: blueviolet;
+    height: 73vh;
+    display:flex;
+    
+}
+
+.page .sub-page .property .sub-description{
+    width: 100%;
+    background-color: chartreuse;
+    height: 13vh;
+    margin-top: 12px;
+}
+
+.page .sub-page .property .presentation .images{
+    width: 47vw;
+    height: 73vh;
+    background-color: darkred;
+}
+
+.page .sub-page .property .presentation .data{
+
+}
+
+*/

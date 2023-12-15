@@ -65,13 +65,23 @@ public class ComprarController {
     @GetMapping("/property/{id}")
     public String comprarProperty(@PathVariable Long id, ModelMap modelo) {
 
-        modelo.put("property", propertyService.getOne(id));
+        boolean hayCartas = false;
 
-        List<Property> properties = propertyService.listComprar3(id);
+        List<Property> properties = propertyService.listComprar5(id);
+
+        if (!properties.isEmpty()) {
+
+            hayCartas = true;
+
+        }
+
+        modelo.addAttribute("hayCartas", hayCartas);
+
+        modelo.put("property", propertyService.getOne(id));
 
         modelo.addAttribute("properties", properties);
 
-        return "detail_property.html";
+        return "detail_property1.html";
     }
 
 }
