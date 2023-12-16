@@ -71,6 +71,26 @@
                                 </ul>
                             </td>
 
+                            <td>
+                                <div class="d-flex justify-content-center">
+
+                                    <!-- Botón Modificar -->
+
+                                    <a th:href="@{/property/editProperty/__${Property.id}__}"
+                                       class="btn btn-sm mx-1 btn-secondary">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <!-- Boton Eliminar -->
+                                    <a th:href="@{/property/editProperty/__${Property.id}__}"
+                                       class="btn btn-sm mx-1 btn-secondary">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                   
+
+                                </div>
+                            </td>
+
                         </tr>
 
                     </tbody>

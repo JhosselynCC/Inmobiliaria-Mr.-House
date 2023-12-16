@@ -45,8 +45,24 @@ and open the template in the editor.
                         <td th:text="${Publishers.name}"></td>
                         <td th:text="${Publishers.typeOwner}"></td>
 
-                        <td> 
-                            <!--<a th:href= "@{/autor/modificar/__${autor.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>-->
+                        <td>
+                            <div class="d-flex justify-content-center">
+
+                                <!-- Botón Modificar -->
+
+                                <a 
+                                   class="btn btn-sm mx-1 btn-secondary">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <!-- Boton Eliminar -->
+                                <a 
+                                   class="btn btn-sm mx-1 btn-secondary">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+
+
+                            </div>
                         </td>
 
                     </tr>

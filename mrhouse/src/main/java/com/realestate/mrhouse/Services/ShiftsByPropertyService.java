@@ -72,7 +72,7 @@ public class ShiftsByPropertyService {
             // Manejar el caso en el que no se puede obtener el usuario autenticado
             throw new MyException("Necesitas estar registrado para poder realizar esta operacion.");
         }
-        shiftsByProperty.setShiftStatus(ShiftStatus.RESERVADO);
+        shiftsByProperty.setShiftStatus(ShiftStatus.PENDIENTE);
 
         shiftsByPropertyRepository.save(shiftsByProperty);
 
@@ -86,10 +86,10 @@ public class ShiftsByPropertyService {
     }
 
     @Transactional
-    public void modifyShiftsByProperty(Long Id, Long IdProperty, Date startTime, String userEmail, String shiftStatus) throws MyException {
+    public void modifyShiftsByProperty(Long Id, Long IdProperty, String userEmail, String shiftStatus) throws MyException {
 
         
-        validationModify(Id, IdProperty, startTime, userEmail, shiftStatus);
+        validationModify(Id, IdProperty, userEmail, shiftStatus);
 
         Optional<ShiftsByProperty> reply = shiftsByPropertyRepository.findById(Id);
         Optional<Property> replyProperty = propertyRepository.findById(IdProperty);
@@ -106,7 +106,7 @@ public class ShiftsByPropertyService {
             ShiftsByProperty shiftsByProperty = reply.get();
             
             shiftsByProperty.setProperty(p);
-            shiftsByProperty.setStartTime(startTime);
+            //shiftsByProperty.setStartTime(startTime);
             shiftsByProperty.setUserEmail(userEmail);
             shiftsByProperty.setShiftStatus(ShiftStatus.valueOf(shiftStatus));
             
@@ -132,7 +132,7 @@ public class ShiftsByPropertyService {
 
     }
 
-    private void validationModify(Long Id, Long IdProperty, Date startTime, 
+    private void validationModify(Long Id, Long IdProperty, 
             String userEmail, String shiftStatus) throws MyException {
         if (Id == null) {
             throw new MyException("El Id de la oferta no puede ser nulo");
@@ -140,9 +140,9 @@ public class ShiftsByPropertyService {
         if (IdProperty == null) {
             throw new MyException("El Id de la propiedad no puede ser nulo");
         }
-        if (startTime == null) {
-            throw new MyException("La fecha no puede ser nulo");
-        }
+      //  if (startTime == null) {
+          //  throw new MyException("La fecha no puede ser nulo");
+       // }
         if (userEmail.isEmpty() || userEmail == null) {
             throw new MyException("El usuarioEmail no puede ser nulo o estar vacio");
         }

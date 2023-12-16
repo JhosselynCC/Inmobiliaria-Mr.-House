@@ -97,7 +97,7 @@ public class ComprarController {
         // Verifica si se han proporcionado parámetros de filtro
         if (city != null && city != City.TODOS || type != null && type != TypeProperty.TODOS || price != null) {
             // Aplica filtros solo si al menos uno de los parámetros no es nulo
-            List<Property> properties = propertyService.findPropertiesByCityAndType(city, type, price);
+            List<Property> properties = propertyService.findPropertiesByCityAndTypeAndPriceCompra(city, type, price);
 
             model.addAttribute("properties", properties);
         } else {

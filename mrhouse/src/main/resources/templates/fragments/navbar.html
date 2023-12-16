@@ -8,7 +8,7 @@
         <div class="d-none d-lg-block" id="navbarCollapse">
             <ul class="navbar-nav navbar1 mx-auto m-0 mb-0">
                 <li class="nav-item nav-item1">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" th:if="${session.usuariosession != null}" href="/home">Home</a>
                 </li>
                 <li class="nav-item nav-item1">
                     <a class="nav-link" href="/comprar">Comprar</a>
@@ -70,7 +70,7 @@
                 <!-- Menu Navegacion Canvas -->
                 <ul class="navbar-nav justify-content-end flex-grow-1 pb-3 d-block d-lg-none">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" th:if="${session.usuariosession != null}" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/comprar">Comprar</a>
@@ -138,14 +138,14 @@
 -->
                         <ul class="dropdown-menu" >    
                             <li><a class="dropdown-item" th:href="@{/listUsers}" >Lista usuarios</a></li>
-                            <li><a class="dropdown-item" href="/logout" >Lista de Roles</a></li>
+                            
                            
                             <li><a class="dropdown-item" th:href="@{/property/list}" >Lista Publicaciones</a></li>
                             <li><a class="dropdown-item" th:href="@{/publishers/list}" >Lista de publicadores</a></li>
                             <li><a class="dropdown-item" th:href="@{/property/listOffer}" >Lista Ofertas</a></li>
                             <li><a class="dropdown-item" th:href="@{/property/listShift}" >Lista de Turnos</a></li>
                             <li><a class="dropdown-item" th:href="@{/contacto/lista}">Lista contactos</a></li>
-                            <li><a class="dropdown-item" href="" >Lista de Noticias</a></li>
+                            
                             
                         </ul>
 

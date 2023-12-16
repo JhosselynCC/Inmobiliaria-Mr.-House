@@ -14,7 +14,7 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
  * @author 2171584201008
  */
 public enum Rol {
-    ADMIN,
     CLIENT,
-    ENTE;    
+    ENTE,
+    ADMIN;    
 }

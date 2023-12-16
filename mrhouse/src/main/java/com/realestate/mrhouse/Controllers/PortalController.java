@@ -98,8 +98,8 @@ public class PortalController {
     @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @GetMapping("/profile")
     public String profile(ModelMap modelo, HttpSession session) {
-        Users user = (Users) session.getAttribute("usuariosession");
-        modelo.put("user", user);
+        Users users = (Users) session.getAttribute("usuariosession");
+        modelo.put("users", users);
 
         return "user_modify.html";
 
@@ -107,6 +107,7 @@ public class PortalController {
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_ENTE','ROLE_ADMIN')")
     @PostMapping("/profile/{id}")
+   
     public String update(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
             @RequestParam String password, String password2, @RequestParam Long dni, @RequestParam Rol rol, ModelMap modelo) {
 
@@ -122,6 +123,7 @@ public class PortalController {
         }
 
     }
+
 
     //list
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")

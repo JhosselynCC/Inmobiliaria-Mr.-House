@@ -339,16 +339,17 @@ public class PropertyController {
     }
 
     @PostMapping("/modifyShift/{Id}")
-    public String modifyShift(@PathVariable Long Id, Long IdProperty, Date startTime, String userEmail, String shiftStatus, ModelMap modelo) {
+    public String modifyShift(@PathVariable Long Id, Long IdProperty, String userEmail, String shiftStatus, ModelMap modelo) {
 
+         
         try {
 
             // Aquí estás intentando analizar la cadena startTime
             //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             //Date parsedDate = dateFormat.parse(startTime.toString());
-            shiftsByPropertyService.modifyShiftsByProperty(Id, IdProperty, startTime, userEmail, shiftStatus);
+            shiftsByPropertyService.modifyShiftsByProperty(Id, IdProperty, userEmail, shiftStatus);
 
-            return "redirect:../listShift";
+            return  "home.html";//"home.html"; //"shiftsByPropertyPublisher_list.html";//"redirect:../listShift";
         } catch (MyException ex) {
             List<Property> properties = propertyService.listProperties();
             modelo.put("error", ex.getMessage());
@@ -437,5 +438,7 @@ public class PropertyController {
         }
 
     }
+    
+    
 
 }

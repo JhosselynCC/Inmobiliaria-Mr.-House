@@ -35,7 +35,7 @@
                             <th scope="col">Estado Oferta</th>
                             <th scope="col">mensaje</th>
 
-                            <th scope="col"  >Acciones</th>
+                            
 
                         </tr>
                     </thead>
@@ -48,9 +48,7 @@
                             <td th:text="${offersByProperty.statusOffer}"></td>
                             <td th:text="${offersByProperty.message}"></td>
 
-                            <td> 
-                                <a th:href="@{/property/modifyOffer/__${offersByProperty.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
-                            </td>
+                           
 
                         </tr>
 

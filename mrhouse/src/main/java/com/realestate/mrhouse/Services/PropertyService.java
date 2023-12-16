@@ -167,9 +167,8 @@ public class PropertyService {
         while (it.hasNext()) {
             Property aux = it.next();
 
-
             if (aux.getId() != id) {
-                
+
                 iterar += 1;
 
                 if (iterar <= 5) {
@@ -185,10 +184,14 @@ public class PropertyService {
         return alquileres5;
     }
 
-    
     //Servicio para controlador de filtros en alquilar
-    public List<Property> findPropertiesByCityAndType(City city, TypeProperty type,Double price) {
-        return propertyRepository.findPropertiesByCityAndTypeAndPrice(city,type,price);
+    public List<Property> findPropertiesByCityAndTypeAndPriceAlquiler(City city, TypeProperty type, Double price) {
+        return propertyRepository.findPropertiesByCityAndTypeAndPriceAlquiler(city, type, price);
+    }
+
+    //Servicio para controlador de filtros en comprar
+    public List<Property> findPropertiesByCityAndTypeAndPriceCompra(City city, TypeProperty type, Double price) {
+        return propertyRepository.findPropertiesByCityAndTypeAndPriceCompra(city, type, price);
     }
 
 
@@ -228,9 +231,8 @@ public class PropertyService {
         while (it.hasNext()) {
             Property aux = it.next();
 
-
             if (aux.getId() != id) {
-                
+
                 iterar += 1;
 
                 if (iterar <= 5) {
@@ -279,7 +281,6 @@ public class PropertyService {
         }
     }
      */
-    
     //Servicio para obtener las ultimas publicaciones por tipo de publicacion
     public List<Property> getLatestAlquilerAndVentaProperties() {
         // Obtener las últimas 2 propiedades de alquiler
@@ -303,10 +304,7 @@ public class PropertyService {
         // Limitar la lista a 4 propiedades
         return latestAlquilerAndVentaProperties.stream().limit(4).collect(Collectors.toList());
     }
-    
-    
-    
-    
+
     public Property getOne(Long id) {
         return propertyRepository.getOne(id);
     }
@@ -345,7 +343,7 @@ public class PropertyService {
         }
 
     }
-    
+
     @Transactional
     public void editProperty(Long id, String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, Long idPublishers) throws MyException {
         validarDos(typePublication, title, typeProperty, features, price, location, province, city, idPublishers);
@@ -373,12 +371,11 @@ public class PropertyService {
             property.setFeatures(features);
 
 //            property.setImages((List<Image>) images);
-
             propertyRepository.save(property);
 
         }
     }
-    
+
     private void validarDos(String typePublication, String title, String typeProperty, String features, Double price, String location, String province, String city, Long idPublisher) throws MyException {
         if (typePublication == null) {
             throw new MyException("El tipo de publicacion no puede ser nulo");
@@ -396,7 +393,6 @@ public class PropertyService {
             throw new MyException("El valor no puede ser nulo o estar vacio");
         }
 
-        
         if (location.isEmpty() || location == null) {
             throw new MyException("La ubicacion no puede ser nula o estar vacia");
         }
@@ -411,5 +407,5 @@ public class PropertyService {
         }
 
     }
-    
+
 }
